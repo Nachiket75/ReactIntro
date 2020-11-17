@@ -26,8 +26,32 @@ class App extends Component {
     )
   }
 
+  nameChangeHandler = (event) =>{
+   this.setState(
+     {
+       persons:[
+         {name:event.target.value, age:25},
+         {name:'Aditya Natekar', age:28},
+         {name:'Revati Natekar', age:54},
+         {name:'Shashikant Natekar', age:61}
+       ]
+     }
+   )
+  }
+
   render() {
+    const style ={
+        backgroundColor:"white",        
+        border: '5px solid cyan',
+        font:'inherit',
+        padding:'8px',
+        margin:'auto 10px',
+        cursor:'pointer'
+
+
+    }
     return (
+ 
       <div className="App">
         <h1>Hi This is React App</h1>
         <p>This is really working</p>
@@ -36,7 +60,8 @@ class App extends Component {
         <Person 
           name= {this.state.persons[0].name} 
           age={this.state.persons[0].age}
-          click = {this.switchNameHandler.bind(this,"Nachiket Natekar")}/>        
+          click = {this.switchNameHandler.bind(this,"Nachiket Natekar")}
+          nameChange ={this.nameChangeHandler}/>        
           {/* click = {()=>this.switchNameHandler("Nachiket Natekar")}/>         this is alternate way of bind method to pass arguments to function*/} 
           
         {/* click will passs refference of switchNameHandler function to Person function  */}
@@ -50,7 +75,11 @@ class App extends Component {
           name={this.state.persons[3].name} 
           age={this.state.persons[3].age}> My hobbies:Sprituality</Person>
 
-        <button onClick ={this.switchNameHandler.bind(this,"Nachiket!! Natekar")} >Switch to full names</button>
+        <button 
+          style = {style}
+          // this is called inline css style 
+          onClick ={this.switchNameHandler.bind(this,"Nachiket!! Natekar")} >Switch to full names
+        </button>
         {/* <Person name="Nachi" age="25"/>
         <Person name="Adi" age="28"/>
         <Person name="Reva" age="54">My hobbies:Singing</Person>
