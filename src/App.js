@@ -13,11 +13,11 @@ class App extends Component {
     ]
   }
 
-  switchNameHandler = () => {
+  switchNameHandler = (newName) => {
     this.setState(
      {
       persons: [
-        {name:'Nachiket Natekar', age:25},
+        {name:newName, age:25},
         {name:'Aditya Natekar', age:28},
         {name:'Revati Natekar', age:54},
         {name:'Shashikant Natekar', age:61}
@@ -36,7 +36,9 @@ class App extends Component {
         <Person 
           name= {this.state.persons[0].name} 
           age={this.state.persons[0].age}
-          click = {this.switchNameHandler}/>        
+          click = {this.switchNameHandler.bind(this,"Nachiket Natekar")}/>        
+          {/* click = {()=>this.switchNameHandler("Nachiket Natekar")}/>         this is alternate way of bind method to pass arguments to function*/} 
+          
         {/* click will passs refference of switchNameHandler function to Person function  */}
         <Person 
           name={this.state.persons[1].name} 
@@ -48,7 +50,7 @@ class App extends Component {
           name={this.state.persons[3].name} 
           age={this.state.persons[3].age}> My hobbies:Sprituality</Person>
 
-        <button onClick ={this.switchNameHandler} >Switch to full names</button>
+        <button onClick ={this.switchNameHandler.bind(this,"Nachiket!! Natekar")} >Switch to full names</button>
         {/* <Person name="Nachi" age="25"/>
         <Person name="Adi" age="28"/>
         <Person name="Reva" age="54">My hobbies:Singing</Person>
