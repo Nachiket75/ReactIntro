@@ -113,20 +113,17 @@ class App extends Component {
       {           
         this.state.showPersons1? 
           <div>
-            <Person 
-              name= {this.state.persons[0].name} 
-              age={this.state.persons[0].age}
-              click = {this.switchNameHandler.bind(this,"Nachiket Natekar")}
-              nameChange ={this.nameChangeHandler}/> 
-            <Person 
-              name={this.state.persons[1].name} 
-              age={this.state.persons[1].age}/>
-            <Person
-              name={this.state.persons[2].name} 
-              age={this.state.persons[2].age} >My hobbies:Singing</Person>
-            <Person 
-              name={this.state.persons[3].name} 
-              age={this.state.persons[3].age}> My hobbies:Sprituality</Person>
+            {
+              // looping in react is done using sytax as shown below
+              this.state.persons.map(person=>{                    
+                return <Person 
+                    name= {person.name} 
+                    age={person.age}
+                    click = {this.switchNameHandler.bind(this,person.name)}
+                    nameChange ={this.nameChangeHandler}
+                  />
+              })
+            }            
           </div>   
           :null
         }       
