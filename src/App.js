@@ -6,14 +6,12 @@ import Person from './Person/Person';
 class App extends Component {
   state = {
     persons: [
-      {name:'Nachi', age:25},
-      {name:'Adi', age:28},
-      {name:'Reva', age:54},
-      {name:'Shashi', age:61}
+      {id:1, name:'Nachi', age:25},
+      {id:2, name:'Adi', age:28},
+      {id:3, name:'Reva', age:54},
+      {id:4, name:'Shashi', age:61}
     ],
-    showPersons1:false      ,
-    showPersons2:false
-
+    showPersons:false   
   }
 
   switchNameHandler = (newName) => {
@@ -29,29 +27,42 @@ class App extends Component {
     )
   }
 
-  nameChangeHandler = (event) =>{
-   this.setState(
-     {
-       persons:[
-         {name:event.target.value, age:25},
-         {name:'Aditya Natekar', age:28},
-         {name:'Revati Natekar', age:54},
-         {name:'Shashikant Natekar', age:61}
-       ]
-     }
-   )
+  nameChangeHandler = (event,id) =>{
+    console.log(id)
+    const personIndex = this.state.persons.findIndex(per =>{
+      return per.id === id;
+    })
+    console.log(personIndex)
+    //taking record of specific person
+    const person = {
+      ...this.state.persons[personIndex]                  
+    }
+    //above statment since state contains objects of each person enclosed in {} we have to enclosed specific person in object using above syntax
+    person.name = event.target.value;
+
+    //creating copy of person array
+    const allPersons = [...this.state.persons]; 
+    //we have updated specific person name using persons index
+    allPersons[personIndex] = person
+
+    this.setState({persons:allPersons});
+    
   }
 
-  togglePersonHandler1 = () =>{
-    const toggleStatus = this.state.showPersons1;
-    this.setState({showPersons1:!toggleStatus});
+  togglePersonHandler = () =>{
+    const toggleStatus = this.state.showPersons;
+    this.setState({showPersons:!toggleStatus});
 
   }
-  togglePersonHandler2 =() =>{
-    const toggleStatus = this.state.showPersons2
-    this.setState({showPersons2:!toggleStatus});
-  }
 
+  deleteNameHandler = (personIndex) =>{
+    // const persons = this.state.persons.slice() This will create copy of array in person variable but below
+    //  method is efficient
+    const persons = [...this.state.persons];
+    persons.splice(personIndex,1);
+    this.setState({persons:persons})
+
+  }
   render() {
     const style ={
         backgroundColor:"white",        
@@ -65,30 +76,30 @@ class App extends Component {
     }
     // Method 2 to toggle Persons pure javascript way
     let personsState = null;
-    if(this.state.showPersons2){     
+    if(this.state.showPersons){     
      personsState =(
       <div>
-        <Person 
-          name= {this.state.persons[0].name} 
-          age={this.state.persons[0].age}
-          click = {this.switchNameHandler.bind(this,"Nachiket Natekar")}
-          nameChange ={this.nameChangeHandler}/> 
-        <Person 
-          name={this.state.persons[1].name} 
-          age={this.state.persons[1].age}/>
-        <Person
-          name={this.state.persons[2].name} 
-          age={this.state.persons[2].age} >My hobbies:Singing</Person>
-        <Person 
-          name={this.state.persons[3].name} 
-          age={this.state.persons[3].age}> My hobbies:Sprituality</Person>
+         {
+           // looping in react is done using sytax as shown below
+           this.state.persons.map((person,index)=>{                    
+            return <Person 
+                name= {person.name} 
+                age={person.age}
+                key={person.id}
+                // click = {this.deleteNameHandler.bind(this,index)} you can do using bind or arrow func as given below
+                click = {()=>this.deleteNameHandler(index)}
+                nameChange ={(event)=>this.nameChangeHandler(event,person.id)}
+                
+              />
+              })
+         }            
       </div>   
     );
   }
     
     
     
-    // method 1 to toggle persons using unorthodox way
+    
     return (
  
       <div className="App">
@@ -97,39 +108,10 @@ class App extends Component {
         <button 
           style = {style}
           // this is called inline css style 
-          onClick ={this.togglePersonHandler1} >Show/Hide Person
+          onClick ={this.togglePersonHandler} >Show/Hide Person
         </button>    
-
-        <button 
-          style = {style}
-          // this is called inline css style 
-          onClick ={this.togglePersonHandler2} >Toggle Person using 2nd way          
-        </button>     
-        {personsState}           
-        {/* call to personsState function to toggle the persons */}
-
- {/* below statement is conditional statement will execute div part if showPersons value is true it will show all persons
- otherwise execute end of div part start from : which will have nothing it will hide all the persons  */}
-      {           
-        this.state.showPersons1? 
-          <div>
-            {
-              // looping in react is done using sytax as shown below
-              this.state.persons.map(person=>{                    
-                return <Person 
-                    name= {person.name} 
-                    age={person.age}
-                    click = {this.switchNameHandler.bind(this,person.name)}
-                    nameChange ={this.nameChangeHandler}
-                  />
-              })
-            }            
-          </div>   
-          :null
-        }       
-
-        
-        
+        {personsState}       
+ 
       </div>
     );
    // return React.createElement('div',{className:'App'}, React.createElement('h1',null,'Does This work now'));  lecture 30:understanding jsx
