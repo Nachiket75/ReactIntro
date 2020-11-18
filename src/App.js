@@ -10,7 +10,10 @@ class App extends Component {
       {name:'Adi', age:28},
       {name:'Reva', age:54},
       {name:'Shashi', age:61}
-    ]
+    ],
+    showPersons1:false      ,
+    showPersons2:false
+
   }
 
   switchNameHandler = (newName) => {
@@ -39,6 +42,16 @@ class App extends Component {
    )
   }
 
+  togglePersonHandler1 = () =>{
+    const toggleStatus = this.state.showPersons1;
+    this.setState({showPersons1:!toggleStatus});
+
+  }
+  togglePersonHandler2 =() =>{
+    const toggleStatus = this.state.showPersons2
+    this.setState({showPersons2:!toggleStatus});
+  }
+
   render() {
     const style ={
         backgroundColor:"white",        
@@ -50,40 +63,76 @@ class App extends Component {
 
 
     }
-    return (
- 
-      <div className="App">
-        <h1>Hi This is React App</h1>
-        <p>This is really working</p>
-
-       
+    // Method 2 to toggle Persons pure javascript way
+    let personsState = null;
+    if(this.state.showPersons2){     
+     personsState =(
+      <div>
         <Person 
           name= {this.state.persons[0].name} 
           age={this.state.persons[0].age}
           click = {this.switchNameHandler.bind(this,"Nachiket Natekar")}
-          nameChange ={this.nameChangeHandler}/>        
-          {/* click = {()=>this.switchNameHandler("Nachiket Natekar")}/>         this is alternate way of bind method to pass arguments to function*/} 
-          
-        {/* click will passs refference of switchNameHandler function to Person function  */}
+          nameChange ={this.nameChangeHandler}/> 
         <Person 
           name={this.state.persons[1].name} 
           age={this.state.persons[1].age}/>
         <Person
-           name={this.state.persons[2].name} 
-           age={this.state.persons[2].age} >My hobbies:Singing</Person>
+          name={this.state.persons[2].name} 
+          age={this.state.persons[2].age} >My hobbies:Singing</Person>
         <Person 
           name={this.state.persons[3].name} 
           age={this.state.persons[3].age}> My hobbies:Sprituality</Person>
+      </div>   
+    );
+  }
+    
+    
+    
+    // method 1 to toggle persons using unorthodox way
+    return (
+ 
+      <div className="App">
+        <h1>Hi This is React App</h1>
+        <p>This is really working</p>       
+        <button 
+          style = {style}
+          // this is called inline css style 
+          onClick ={this.togglePersonHandler1} >Show/Hide Person
+        </button>    
 
         <button 
           style = {style}
           // this is called inline css style 
-          onClick ={this.switchNameHandler.bind(this,"Nachiket!! Natekar")} >Switch to full names
-        </button>
-        {/* <Person name="Nachi" age="25"/>
-        <Person name="Adi" age="28"/>
-        <Person name="Reva" age="54">My hobbies:Singing</Person>
-        <Person name="Shashi" age="61">My hobbies:Sprituality</Person> */}
+          onClick ={this.togglePersonHandler2} >Toggle Person using 2nd way          
+        </button>     
+        {personsState}           
+        {/* call to personsState function to toggle the persons */}
+
+ {/* below statement is conditional statement will execute div part if showPersons value is true it will show all persons
+ otherwise execute end of div part start from : which will have nothing it will hide all the persons  */}
+      {           
+        this.state.showPersons1? 
+          <div>
+            <Person 
+              name= {this.state.persons[0].name} 
+              age={this.state.persons[0].age}
+              click = {this.switchNameHandler.bind(this,"Nachiket Natekar")}
+              nameChange ={this.nameChangeHandler}/> 
+            <Person 
+              name={this.state.persons[1].name} 
+              age={this.state.persons[1].age}/>
+            <Person
+              name={this.state.persons[2].name} 
+              age={this.state.persons[2].age} >My hobbies:Singing</Person>
+            <Person 
+              name={this.state.persons[3].name} 
+              age={this.state.persons[3].age}> My hobbies:Sprituality</Person>
+          </div>   
+          :null
+        }       
+
+        
+        
       </div>
     );
    // return React.createElement('div',{className:'App'}, React.createElement('h1',null,'Does This work now'));  lecture 30:understanding jsx
