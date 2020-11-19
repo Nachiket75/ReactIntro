@@ -1,120 +1,58 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import Person from './Person/Person';
+import Validation from './Validation/Validation'
+import Char from './Char/Char'
+
 
 class App extends Component {
   state = {
-    persons: [
-      {id:1, name:'Nachi', age:25},
-      {id:2, name:'Adi', age:28},
-      {id:3, name:'Reva', age:54},
-      {id:4, name:'Shashi', age:61}
-    ],
-    showPersons:false   
+    userInput :''
+  }
+  inputChangeHandler=(event)=>{
+    this.setState({userInput : event.target.value});
+    console.log(this.state.userInput);
   }
 
-  switchNameHandler = (newName) => {
-    this.setState(
-     {
-      persons: [
-        {name:newName, age:25},
-        {name:'Aditya Natekar', age:28},
-        {name:'Revati Natekar', age:54},
-        {name:'Shashikant Natekar', age:61}
-      ]
-     }
-    )
+  deleteCharHandler=(index)=>{
+    const text = this.state.userInput.split('');
+    text.splice(index,1);
+    const updatedText = text.join('');
+    this.setState({userInput:updatedText});
   }
 
-  nameChangeHandler = (event,id) =>{
-    console.log(id)
-    const personIndex = this.state.persons.findIndex(per =>{
-      return per.id === id;
-    })
-    console.log(personIndex)
-    //taking record of specific person
-    const person = {
-      ...this.state.persons[personIndex]                  
-    }
-    //above statment since state contains objects of each person enclosed in {} we have to enclosed specific person in object using above syntax
-    person.name = event.target.value;
+    render() {
+      const charList = this.state.userInput.split('').map((ch,index) =>{
+        return <Char
+         character = {ch}
+         clicked = {()=>this.deleteCharHandler(index)}        
+        />
+      })
+      // split will create one char of string and convert it into javascript array in charList
+      
 
-    //creating copy of person array
-    const allPersons = [...this.state.persons]; 
-    //we have updated specific person name using persons index
-    allPersons[personIndex] = person
-
-    this.setState({persons:allPersons});
-    
-  }
-
-  togglePersonHandler = () =>{
-    const toggleStatus = this.state.showPersons;
-    this.setState({showPersons:!toggleStatus});
-
-  }
-
-  deleteNameHandler = (personIndex) =>{
-    // const persons = this.state.persons.slice() This will create copy of array in person variable but below
-    //  method is efficient
-    const persons = [...this.state.persons];
-    persons.splice(personIndex,1);
-    this.setState({persons:persons})
-
-  }
-  render() {
-    const style ={
-        backgroundColor:"white",        
-        border: '5px solid cyan',
-        font:'inherit',
-        padding:'8px',
-        margin:'auto 10px',
-        cursor:'pointer'
-
-
-    }
-    // Method 2 to toggle Persons pure javascript way
-    let personsState = null;
-    if(this.state.showPersons){     
-     personsState =(
-      <div>
-         {
-           // looping in react is done using sytax as shown below
-           this.state.persons.map((person,index)=>{                    
-            return <Person 
-                name= {person.name} 
-                age={person.age}
-                key={person.id}
-                // click = {this.deleteNameHandler.bind(this,index)} you can do using bind or arrow func as given below
-                click = {()=>this.deleteNameHandler(index)}
-                nameChange ={(event)=>this.nameChangeHandler(event,person.id)}
-                
-              />
-              })
-         }            
-      </div>   
-    );
-  }
-    
-    
-    
-    
     return (
  
       <div className="App">
-        <h1>Hi This is React App</h1>
-        <p>This is really working</p>       
-        <button 
-          style = {style}
-          // this is called inline css style 
-          onClick ={this.togglePersonHandler} >Show/Hide Person
-        </button>    
-        {personsState}       
- 
+        <ol>
+          <li>Create an input field (in App component) with a change listener which outputs the length of the entered text below it (e.g. in a paragraph).</li>
+          <li>Create a new component (=> ValidationComponent) which receives the text length as a prop</li>
+          <li>Inside the ValidationComponent, either output "Text too short" or "Text long enough" depending on the text length (e.g. take 5 as a minimum length)</li>
+          <li>Create another component (=> CharComponent) and style it as an inline box (=> display: inline-block, padding: 16px, text-align: center, margin: 16px, border: 1px solid black).</li>
+          <li>Render a list of CharComponents where each CharComponent receives a different letter of the entered text (in the initial input field) as a prop.</li>
+          <li>When you click a CharComponent, it should be removed from the entered text.</li>
+        </ol>
+        <p>Hint: Keep in mind that JavaScript strings are basically arrays!</p>
+        <hr/>
+        <input type="text" 
+          onChange={(event)=>this.inputChangeHandler(event)} 
+          value={this.state.userInput} />
+        <p>userInput:{this.state.userInput}</p>
+        <Validation inputLen = {this.state.userInput.length}/>
+        {charList}
       </div>
     );
-   // return React.createElement('div',{className:'App'}, React.createElement('h1',null,'Does This work now'));  lecture 30:understanding jsx
+  
   }
 }
 
