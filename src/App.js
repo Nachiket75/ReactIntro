@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import './App.css';
 import Person from './Person/Person';
-import styled from 'styled-components';
+
 
 class App extends Component {
   state = {
@@ -64,24 +63,7 @@ class App extends Component {
     this.setState({persons:persons})
 
   }
-  render() {
-    // dynamically changing backgroundColor of button when if condition is true using props.alt
-    const StyledButton = styled.button`
-        background-color:${props =>props.alt? 'red':'green' };        
-        color:white;
-        border: 5px solid cyan;
-        font:inherit;
-        padding:8px;
-        margin:auto 10px;
-        cursor:pointer;
-        &:hover {
-          background-color:${props=>props.alt?'salmon':'lightgreen'};
-          color:green;
-        }
-        `
-        // this hover css style  is added using styled package. styled package is used to use extra functionality in inline css.
-        //this is different button using styled package
-
+  render() {    
     let personsState = null;
     if(this.state.showPersons){     
      personsState =(
@@ -124,10 +106,10 @@ class App extends Component {
         <h1>Hi This is React App</h1>
         <p className={classes.join(' ')}>This is really working</p>      
         {/* classes.join is used to to join more than one class  */}
-        <StyledButton           
-          alt = {this.state.showPersons}
+        <button           
+          className="button"
           onClick ={this.togglePersonHandler} >Show/Hide Person
-        </StyledButton>    
+        </button>    
         {personsState}       
  
       </div>
