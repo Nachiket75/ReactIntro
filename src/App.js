@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
+import Radium from 'radium';
 import Person from './Person/Person';
+
 
 class App extends Component {
   state = {
@@ -71,8 +73,12 @@ class App extends Component {
         font:'inherit',
         padding:'8px',
         margin:'auto 10px',
-        cursor:'pointer'
-
+        cursor:'pointer',
+        ':hover':{
+          backgroundColor:"lightgreen",
+          color:'green'
+        }
+        // this hover css style  is added using radium app. radium app is used to use extra functionality in inline css.
 
     }
     // Method 2 to toggle Persons pure javascript way
@@ -98,6 +104,13 @@ class App extends Component {
     );
     style.backgroundColor = "red"
     // dynamically changing backgroundColor of button when if condition is true
+
+    style[':hover']= {
+      backgroundColor:"salmon",
+      color:'red'
+    }
+    // this hover css style  is added using radium app. radium app is used to use extra functionality in inline css.
+    //hover effect is observe when you move mouse cursor over button
   }
     
   //dyanmically assigning css classed
@@ -135,4 +148,6 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
+
+//add Radium above App is called higher order component i.e wrapping you component and adding some extra functionality 
