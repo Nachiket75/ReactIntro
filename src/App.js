@@ -65,7 +65,8 @@ class App extends Component {
   }
   render() {
     const style ={
-        backgroundColor:"white",        
+        backgroundColor:"green",        
+        color:"white",
         border: '5px solid cyan',
         font:'inherit',
         padding:'8px',
@@ -95,8 +96,23 @@ class App extends Component {
          }            
       </div>   
     );
+    style.backgroundColor = "red"
+    // dynamically changing backgroundColor of button when if condition is true
   }
     
+  //dyanmically assigning css classed
+  const classes = [];
+  
+  if(this.state.persons.length<=4){
+    classes.push('bold')
+    classes.push('green')
+  }
+  if(this.state.persons.length<=2){
+    classes.pop('green')
+    classes.push('red')
+    // pop will remove the class and push will add the css class
+  }
+
     
     
     
@@ -104,7 +120,8 @@ class App extends Component {
  
       <div className="App">
         <h1>Hi This is React App</h1>
-        <p>This is really working</p>       
+        <p className={classes.join(' ')}>This is really working</p>      
+        {/* classes.join is used to to join more than one class  */}
         <button 
           style = {style}
           // this is called inline css style 
