@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
-
-import Radium, {StyleRoot} from 'radium'
 import Person from './Person/Person';
-
+import styled from 'styled-components';
 
 class App extends Component {
   state = {
@@ -67,22 +65,23 @@ class App extends Component {
 
   }
   render() {
-    const style ={
-        backgroundColor:"green",        
-        color:"white",
-        border: '5px solid cyan',
-        font:'inherit',
-        padding:'8px',
-        margin:'auto 10px',
-        cursor:'pointer',
-        ':hover':{
-          backgroundColor:"lightgreen",
-          color:'green'
+    // dynamically changing backgroundColor of button when if condition is true using props.alt
+    const StyledButton = styled.button`
+        background-color:${props =>props.alt? 'red':'green' };        
+        color:white;
+        border: 5px solid cyan;
+        font:inherit;
+        padding:8px;
+        margin:auto 10px;
+        cursor:pointer;
+        &:hover {
+          background-color:${props=>props.alt?'salmon':'lightgreen'};
+          color:green;
         }
-        // this hover css style  is added using radium app. radium app is used to use extra functionality in inline css.
+        `
+        // this hover css style  is added using styled package. styled package is used to use extra functionality in inline css.
+        //this is different button using styled package
 
-    }
-    // Method 2 to toggle Persons pure javascript way
     let personsState = null;
     if(this.state.showPersons){     
      personsState =(
@@ -102,16 +101,8 @@ class App extends Component {
               })
          }            
       </div>   
-    );
-    style.backgroundColor = "red"
-    // dynamically changing backgroundColor of button when if condition is true
-
-    style[':hover']= {
-      backgroundColor:"salmon",
-      color:'red'
-    }
-    // this hover css style  is added using radium app. radium app is used to use extra functionality in inline css.
-    //hover effect is observe when you move mouse cursor over button
+    );   
+   
   }
     
   //dyanmically assigning css classed
@@ -126,31 +117,25 @@ class App extends Component {
     classes.push('red')
     // pop will remove the class and push will add the css class
   }
-
+   
     
-    
-    
-    return (
-      <StyleRoot>
-            {/* styleroot used to apply the @media effect in radium  */}
+    return (           
       <div className="App">
         <h1>Hi This is React App</h1>
         <p className={classes.join(' ')}>This is really working</p>      
         {/* classes.join is used to to join more than one class  */}
-        <button 
-          style = {style}
-          // this is called inline css style 
+        <StyledButton           
+          alt = {this.state.showPersons}
           onClick ={this.togglePersonHandler} >Show/Hide Person
-        </button>    
+        </StyledButton>    
         {personsState}       
  
       </div>
-      </StyleRoot>
     );
    // return React.createElement('div',{className:'App'}, React.createElement('h1',null,'Does This work now'));  lecture 30:understanding jsx
   }
 }
 
-export default Radium(App);
+export default App;
 
 //add Radium above App is called higher order component i.e wrapping you component and adding some extra functionality 
