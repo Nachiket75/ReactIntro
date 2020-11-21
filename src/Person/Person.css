@@ -8,11 +8,11 @@
     text-align: center;
 
 }
-/* @media(min-width:500px){
+@media(min-width:500px){
     .Person{
         width: 450px;
     }
-} */
+}
 
 /* Above media functionality we are going to use in inline css using Radium package in file person.js. 
 @media will keep fix width of 500 px of screen even if you change your screen size*/

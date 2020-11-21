@@ -28,3 +28,12 @@
   background-color:lightgreen;
   color:green;
 }
+
+.button.Red{
+  background-color: red;
+}
+
+.button.Red:hover{
+  background-color: salmon;
+
+}

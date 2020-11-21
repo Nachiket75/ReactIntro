@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import allclasses from './App.css';
 import Person from './Person/Person';
 
 
@@ -65,7 +65,9 @@ class App extends Component {
   }
   render() {    
     let personsState = null;
-    if(this.state.showPersons){     
+    let btnClass = [allclasses.button]
+    if(this.state.showPersons){   
+      btnClass.push(allclasses.Red);  
      personsState =(
       <div>
          {
@@ -81,6 +83,7 @@ class App extends Component {
                 
               />
               })
+              
          }            
       </div>   
     );   
@@ -91,23 +94,23 @@ class App extends Component {
   const classes = [];
   
   if(this.state.persons.length<=4){
-    classes.push('bold')
-    classes.push('green')
+    classes.push(allclasses.bold)
+    classes.push(allclasses.green)
   }
   if(this.state.persons.length<=2){
-    classes.pop('green')
-    classes.push('red')
+    classes.pop(allclasses.green)
+    classes.push(allclasses.red)
     // pop will remove the class and push will add the css class
   }
    
     
     return (           
-      <div className="App">
+      <div className={allclasses.App}>
         <h1>Hi This is React App</h1>
         <p className={classes.join(' ')}>This is really working</p>      
         {/* classes.join is used to to join more than one class  */}
         <button           
-          className="button"
+          className={btnClass.join(' ')}
           onClick ={this.togglePersonHandler} >Show/Hide Person
         </button>    
         {personsState}       
