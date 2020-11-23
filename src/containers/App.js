@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import allclasses from './App.css';
-import Person from './Person/Person';
+import Person from '../components/Persons/Person/Person'; //Person.js file contains in this path components/Persons/Person/Person
 
 
 class App extends Component {
