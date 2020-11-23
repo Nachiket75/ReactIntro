@@ -19,7 +19,7 @@ const cockpit = (props) => {
     
     return (    
         <div>
-            <h1>Hi This is React App</h1>
+            <h1>{props.title}</h1>
             <p className={classes.join(' ')}>This is really working</p>      
             {/* classes.join is used to to join more than one class  */}
             <button           
