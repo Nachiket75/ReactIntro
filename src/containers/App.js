@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import allclasses from './App.css';
-import Person from '../components/Persons/Person/Person'; //Person.js file contains in this path components/Persons/Person/Person
-
+import Persons from '../components/Persons/Persons'; //Persons.js file contains in this path components/Persons/Person/Person
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
   state = {
@@ -65,54 +65,28 @@ class App extends Component {
   }
   render() {    
     let personsState = null;
-    let btnClass = [allclasses.button]
-    if(this.state.showPersons){   
-      btnClass.push(allclasses.Red);  
+    if(this.state.showPersons){     
      personsState =(
       <div>
          {
-           // looping in react is done using sytax as shown below
-           this.state.persons.map((person,index)=>{                    
-            return <Person 
-                name= {person.name} 
-                age={person.age}
-                key={person.id}
-                // click = {this.deleteNameHandler.bind(this,index)} you can do using bind or arrow func as given below
-                click = {()=>this.deleteNameHandler(index)}
-                nameChange ={(event)=>this.nameChangeHandler(event,person.id)}
-                
-              />
-              })
-              
+           <Persons 
+            persons = {this.state.persons}
+            click = {this.deleteNameHandler}
+            nameChange = {this.nameChangeHandler}
+            />
          }            
       </div>   
     );   
    
   }
-    
-  //dyanmically assigning css classed
-  const classes = [];
-  
-  if(this.state.persons.length<=4){
-    classes.push(allclasses.bold)
-    classes.push(allclasses.green)
-  }
-  if(this.state.persons.length<=2){
-    classes.pop(allclasses.green)
-    classes.push(allclasses.red)
-    // pop will remove the class and push will add the css class
-  }
-   
-    
+
     return (           
       <div className={allclasses.App}>
-        <h1>Hi This is React App</h1>
-        <p className={classes.join(' ')}>This is really working</p>      
-        {/* classes.join is used to to join more than one class  */}
-        <button           
-          className={btnClass.join(' ')}
-          onClick ={this.togglePersonHandler} >Show/Hide Person
-        </button>    
+        <Cockpit 
+          showPersons = {this.state.showPersons}
+          persons = {this.state.persons}
+          onClick = {this.togglePersonHandler}
+        />    
         {personsState}       
  
       </div>
