@@ -1,7 +1,12 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import allclasses from './Cockpit.css'
 
 const cockpit = (props) => {
+    useEffect(()=>{
+        consol.log('[Cockpit.js] useEffect')
+    });
+    //useEffect is used in functional component to perform http request and do extra activity as this useEffect function alsways executed in fucntion based component    
+
     const classes = [];
     let btnClass = [allclasses.button]
     if(props.showPersons)
