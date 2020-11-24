@@ -1,7 +1,7 @@
-import React,{Component} from 'react'
+import React,{PureComponent} from 'react'
 import Person from './Person/Person'
 
-class Persons extends Component { 
+class Persons extends PureComponent { 
   // static getDerivedStateFromProps(props, state) {
   //   console.log('[Persons.js] getDerivedStateFromProps');
   //   return state;
@@ -11,15 +11,18 @@ class Persons extends Component {
   //   console.log('[Persons.js] componentWillReceiveProps', props);
   // }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log('[Persons.js] shouldComponentUpdate');
-    if(nextProps.persons !== this.props.persons){
-      return true;  
-    }
-    else{
-      return false;
-    }
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log('[Persons.js] shouldComponentUpdate');
+  //   if(nextProps.persons !== this.props.persons || 
+  //      nextProps.nameChange!== this.props.nameChange ||
+  //      nextProps.click!== this.props.click){
+  //     return true;  
+  //   }
+  //   else{
+  //     return false;
+  //   }
+  // }    ***** what shouldComponentUpdate() does This all can be done by simply importing pureComponent and
+  //      using it in class by extending it******
 
   getSnapshotBeforeUpdate(prevProps, prevState) {
     console.log('[Persons.js] getSnapshotBeforeUpdate');
