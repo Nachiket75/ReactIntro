@@ -18,11 +18,11 @@ const cockpit = (props) => {
     if(props.showPersons)
         btnClass.push(allclasses.Red); 
     //dyanmically assigning css classed
-    if(props.persons.length<=4){
+    if(props.personsLength<=4){
       classes.push(allclasses.bold)
       classes.push(allclasses.green)
     }
-    if(props.persons.length<=2){
+    if(props.personsLength<=2){
       classes.pop(allclasses.green)
       classes.push(allclasses.red)
       // pop will remove the class and push will add the css class
@@ -42,4 +42,4 @@ const cockpit = (props) => {
     
 }
 
-export default cockpit;
+export default React.memo(cockpit);
