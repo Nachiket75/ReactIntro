@@ -3,8 +3,14 @@ import allclasses from './Cockpit.css'
 
 const cockpit = (props) => {
     useEffect(()=>{
-        consol.log('[Cockpit.js] useEffect')
-    });
+        console.log('[Cockpit.js] useEffect')
+        //Http request...
+        setTimeout(() =>{
+            alert('Saved data to cloud')
+        },1000);     //every time user do something event this will alert if you dont control useEffect by adding condition below                  
+
+    },[props.persons]);       //we're controlling useEffect here using [props.persons] condition userEffect will alet whenever Persons copmonent changes.       
+    //we can use only [] i.e blank to run alert only once
     //useEffect is used in functional component to perform http request and do extra activity as this useEffect function alsways executed in fucntion based component    
 
     const classes = [];
