@@ -39,7 +39,7 @@ class App extends Component {
   componentDidUpdate() {
     console.log('[App.js] componentDidUpdate');
   }
-
+//Component update life cycle (for state changes)  is done by adding shouldComponentUpdate() and componentDidUpdate()  in app.js  
 
 
   switchNameHandler = (newName) => {
