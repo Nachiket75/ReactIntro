@@ -6,6 +6,16 @@ import PropTypes from 'prop-types'
 //import classes from './Person.css' is called use of css moduling
 
 class Person extends Component {
+
+    // constructor(props){
+    //     super(props);
+    //     this.inputElementRef = React.createRef()
+    // }
+    componentDidMount(){
+         this.inputElement.focus();
+        // ref = {(inputEl) => {this.inputElement = inputEl}} 
+        //this.inputElementRef.current.focus()
+    }
     render() {
         console.log("Person.js is rendering ")
         return (
@@ -15,7 +25,13 @@ class Person extends Component {
                 <p onClick={this.props.click}>I'm {this.props.name} and I'm {this.props.age} years old </p>
                 {/* props.click will execute switchandler function of app.js from here when paragraph is clicked*/}
                 <p>{this.props.children}</p>
-                <input type="text" onChange={this.props.nameChange} value={this.props.name}></input>
+                <input 
+                    ref = {(inputEl) => {this.inputElement = inputEl}} 
+                    type="text" 
+                    onChange={this.props.nameChange} 
+                    value={this.props.name}>
+                    
+                </input>
             
             </Aux>
             //</React.Fragment> 
