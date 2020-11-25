@@ -10,7 +10,7 @@ class App extends Component {
   }
   state = {
     persons: [
-      {id:1, name:'Nachi', age:25},
+      {id:1, name:'Nachi', age:'25'},
       {id:2, name:'Adi', age:28},
       {id:3, name:'Reva', age:54},
       {id:4, name:'Shashi', age:61}
@@ -46,7 +46,7 @@ class App extends Component {
     this.setState(
      {
       persons: [
-        {name:newName, age:25},
+        {name:newName, age:'25'},
         {name:'Aditya Natekar', age:28},
         {name:'Revati Natekar', age:54},
         {name:'Shashikant Natekar', age:61}

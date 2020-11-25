@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import classes from './Person.css' 
 import Aux from '../../../hoc/Auxilary'
-
+import PropTypes from 'prop-types'
 // import .css file is called external css style 
 //import classes from './Person.css' is called use of css moduling
 
@@ -23,6 +23,13 @@ class Person extends Component {
         )
     //{Math.floor(Math.random()*30)} years old
     }
+}
+
+Person.prototypes = {
+    onClick:PropTypes.func,
+    onChange: PropTypes.func,
+    name: PropTypes.string,
+    age: PropTypes.number
 }
 
 export default Person;        
