@@ -10,8 +10,8 @@ class Person extends Component {
         console.log("Person.js is rendering ")
         return (
             //<div className={classes.Person} >
- //<React.Fragment className={classes.Person}> you can also use built in Hoc(higher order component) React.Fragment instead of creating Aux component
-            <Aux > 
+ //<React.Fragment className={classes.Person}> you can also use built in Hoc(higher order component) React.Fragment instead of creating Aux component using Aux.js
+            <Aux cssClass={classes.Person}> 
                 <p onClick={this.props.click}>I'm {this.props.name} and I'm {this.props.age} years old </p>
                 {/* props.click will execute switchandler function of app.js from here when paragraph is clicked*/}
                 <p>{this.props.children}</p>
