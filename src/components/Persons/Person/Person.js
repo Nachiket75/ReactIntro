@@ -7,14 +7,14 @@ import PropTypes from 'prop-types'
 
 class Person extends Component {
 
-    // constructor(props){
-    //     super(props);
-    //     this.inputElementRef = React.createRef()
-    // }
+    constructor(props){
+        super(props);
+        this.inputElementRef = React.createRef()
+    }
     componentDidMount(){
-         this.inputElement.focus();
+        // this.inputElement.focus();
         // ref = {(inputEl) => {this.inputElement = inputEl}} 
-        //this.inputElementRef.current.focus()
+        this.inputElementRef.current.focus()
     }
     render() {
         console.log("Person.js is rendering ")
@@ -26,7 +26,7 @@ class Person extends Component {
                 {/* props.click will execute switchandler function of app.js from here when paragraph is clicked*/}
                 <p>{this.props.children}</p>
                 <input 
-                    ref = {(inputEl) => {this.inputElement = inputEl}} 
+                    ref = {this.inputElementRef}
                     type="text" 
                     onChange={this.props.nameChange} 
                     value={this.props.name}>
