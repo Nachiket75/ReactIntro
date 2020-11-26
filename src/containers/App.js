@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import allclasses from './App.css';
 import Persons from '../components/Persons/Persons'; //Persons.js file contains in this path components/Persons/Person/Person
 import Cockpit from '../components/Cockpit/Cockpit';
+import AuthContext from '../context/auth-context';
 
 class App extends Component {
   constructor(props) {
@@ -15,7 +16,9 @@ class App extends Component {
       {id:3, name:'Reva', age:54},
       {id:4, name:'Shashi', age:61}
     ],
-    showPersons:false   
+    showPersons:false  ,
+    showCockpit:true,
+    authenticated:false 
   }
   
   static getDerivedStateFromProps(props, state) {
@@ -89,8 +92,12 @@ class App extends Component {
     const persons = [...this.state.persons];
     persons.splice(personIndex,1);
     this.setState({persons:persons})
-
   }
+
+  loginHandler = ()=>{
+    this.setState({authenticated:true});
+  }
+
   render() {    
     let personsState = null;
     if(this.state.showPersons){     
@@ -101,6 +108,7 @@ class App extends Component {
             persons = {this.state.persons}
             click = {this.deleteNameHandler}
             nameChange = {this.nameChangeHandler}
+           
             />
          }            
       </div>   
@@ -108,17 +116,29 @@ class App extends Component {
    
   }
 
-    return (           
-      <div className={allclasses.App}>
-        <Cockpit 
-          title = {this.props.appTitle}
-          showPersons = {this.state.showPersons}
-          personsLength = {this.state.persons.length}
-          onClick = {this.togglePersonHandler}
-        />    
-        {personsState}       
- 
-      </div>
+    return (    
+             
+      <AuthContext.Provider 
+        value={{authenticated:this.state.authenticated,
+        login:this.loginHandler}}
+      >
+        {this.state.showCockpit ? (
+          <div className={allclasses.App}>
+            <Cockpit 
+              title = {this.props.appTitle}
+              showPersons = {this.state.showPersons}
+              personsLength = {this.state.persons.length}
+              onClick = {this.togglePersonHandler}
+            />    
+         
+                
+  
+          </div>
+        ): null}
+        <div>
+          {personsState} 
+        </div>
+      </AuthContext.Provider>
     );
    // return React.createElement('div',{className:'App'}, React.createElement('h1',null,'Does This work now'));  lecture 30:understanding jsx
   }

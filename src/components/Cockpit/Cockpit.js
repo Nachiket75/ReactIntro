@@ -1,9 +1,10 @@
-import React,{useEffect,useRef} from 'react'
+import React,{useEffect,useRef,useContext} from 'react'
 import allclasses from './Cockpit.css'
-
+import AuthContext from '../../context/auth-context';
 
 const cockpit = (props) => {
     const toggleBtnRef = useRef(null);
+    const authcontext = useContext(AuthContext);
     // useEffect(()=>{
     //     console.log('[Cockpit.js] useEffect')
     //     //Http request...
@@ -46,6 +47,7 @@ const cockpit = (props) => {
                 className={btnClass.join(' ')}
                 onClick ={props.onClick} >Show/Hide Person
             </button>    
+            <button onClick={authcontext.login} className={allclasses.button}>Login</button>
         </div>
     )
     

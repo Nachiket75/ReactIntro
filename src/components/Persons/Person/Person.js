@@ -4,13 +4,15 @@ import Aux from '../../../hoc/Auxilary'
 import PropTypes from 'prop-types'
 // import .css file is called external css style 
 //import classes from './Person.css' is called use of css moduling
-
+import AuthContext from '../../../context/auth-context';
 class Person extends Component {
 
     constructor(props){
         super(props);
         this.inputElementRef = React.createRef()
     }
+    static contextType = AuthContext;
+
     componentDidMount(){
         // this.inputElement.focus();
         // ref = {(inputEl) => {this.inputElement = inputEl}} 
@@ -22,6 +24,12 @@ class Person extends Component {
             //<div className={classes.Person} >
  //<React.Fragment className={classes.Person}> you can also use built in Hoc(higher order component) React.Fragment instead of creating Aux component using Aux.js
             <Aux cssClass={classes.Person}> 
+
+                {this.context.authenticated ? (
+                <p>Authenticated</p>
+                ):<p>Please login</p>
+                }
+                
                 <p onClick={this.props.click}>I'm {this.props.name} and I'm {this.props.age} years old </p>
                 {/* props.click will execute switchandler function of app.js from here when paragraph is clicked*/}
                 <p>{this.props.children}</p>
