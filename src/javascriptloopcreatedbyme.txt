@@ -1,0 +1,31 @@
+const map = { a: 1, b: 2, c: 3 };
+
+
+res = Object.keys(map);
+console.log(res)
+
+const result1 = Object.values(map);
+console.log(result1)
+
+var list =[]
+var count=0;
+for (var i = 0; i < result1.length; i++) {
+  for(var j=0;j<result1[i];j++){
+     list[count]=res[i]
+     count=count+1;
+  }
+}
+  
+console.log(list)
+
+
+output:
+[1, 2, 3]
+["a", "b", "c"]
+1
+["a", "b", "b", "c", "c", "c"]
+
+
+you can use this in burger builder project to repeat ingredients as per their value.
+like we did hear a ingredient is 1 time so we add this once in a list whereas b is 2 times we added it twice.
+similarly for c we added it thrice.
