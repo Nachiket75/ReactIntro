@@ -15,7 +15,9 @@ const burger = (props)=>{
         }                              
     }
     //console.log(ingredientList)
-   
+    if(ingredientList.length===0){
+        noIngredientMsg = <p>Please Start Adding Ingredients</p>
+    }
     return(
         <div className={classes.Burger}>
             <BurgerIngredient type="bread-top"/>
@@ -30,7 +32,7 @@ const burger = (props)=>{
                 )  
              )        
             } 
-            
+            {noIngredientMsg}
            
             <BurgerIngredient type="bread-bottom"/>
         </div>
