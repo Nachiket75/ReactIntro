@@ -17,7 +17,23 @@ class BergerBuilder extends Component{
             cheese:0,
             meat:0
         },
-        totalPrice:4
+        totalPrice:4,
+        purchasable:false
+    }
+    updatePurchaseState(ingredients){    
+        //console.log(ingredients)
+        let ingValList = Object.values(ingredients)
+        //console.log(ingValList)
+        let totalIngredients =0;
+        for(let i=0;i<ingValList.length;i++){
+            totalIngredients=totalIngredients+ingValList[i]
+        }
+        console.log(totalIngredients)
+        if(totalIngredients>0)
+            this.setState({purchasable:true});         
+        else
+            this.setState({purchasable:false});      
+
     }
     addIngredientHandler= (type) => {
         const oldCount = this.state.ingredients[type];
@@ -33,7 +49,7 @@ class BergerBuilder extends Component{
         this.setState({totalPrice:newPrice, ingredients:updatedIngredients})
         
         console.log(newPrice);
-
+        this.updatePurchaseState(updatedIngredients);
     }
     
     removeIngredientHandler= (type)=> {
@@ -54,7 +70,7 @@ class BergerBuilder extends Component{
         this.setState({totalPrice:newPrice, ingredients:updatedIngredients})
         
         console.log(newPrice);
-
+        this.updatePurchaseState(updatedIngredients);
     }
 
     render(){
@@ -71,7 +87,8 @@ class BergerBuilder extends Component{
                     ingredientAdded = {this.addIngredientHandler}
                     ingredientRemoved = {this.removeIngredientHandler}
                     disabled={disabledInfo}
-                    price ={this.state.totalPrice}/>
+                    price ={this.state.totalPrice}
+                    purchasable = {this.state.purchasable}/>
             </Aux>
         )
     }
