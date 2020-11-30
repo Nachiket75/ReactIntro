@@ -77,6 +77,9 @@ class BergerBuilder extends Component{
     burgerOrdered = () =>{
         this.setState({ordered:true});
     }
+    purchaseCancelHandler = () =>{
+        this.setState({ordered:false});
+    }
     render(){
         const disabledInfo = {
             ...this.state.ingredients
@@ -86,7 +89,7 @@ class BergerBuilder extends Component{
         }
         return(
             <Aux>
-                <Modal show={this.state.ordered}>
+                <Modal show={this.state.ordered} modalClosed = {this.purchaseCancelHandler}>
                     <OrderSummary ingredients={this.state.ingredients}/>
                 </Modal>
                 <Burger ingredients={this.state.ingredients}/>
