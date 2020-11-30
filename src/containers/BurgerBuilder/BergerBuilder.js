@@ -19,7 +19,8 @@ class BergerBuilder extends Component{
             meat:0
         },
         totalPrice:4,
-        purchasable:false
+        purchasable:false,
+        ordered:false
     }
     updatePurchaseState(ingredients){    
         //console.log(ingredients)
@@ -73,7 +74,9 @@ class BergerBuilder extends Component{
         console.log(newPrice);
         this.updatePurchaseState(updatedIngredients);
     }
-
+    burgerOrdered = () =>{
+        this.setState({ordered:true});
+    }
     render(){
         const disabledInfo = {
             ...this.state.ingredients
@@ -83,7 +86,7 @@ class BergerBuilder extends Component{
         }
         return(
             <Aux>
-                <Modal>
+                <Modal show={this.state.ordered}>
                     <OrderSummary ingredients={this.state.ingredients}/>
                 </Modal>
                 <Burger ingredients={this.state.ingredients}/>
@@ -92,7 +95,8 @@ class BergerBuilder extends Component{
                     ingredientRemoved = {this.removeIngredientHandler}
                     disabled={disabledInfo}
                     price ={this.state.totalPrice}
-                    purchasable = {this.state.purchasable}/>
+                    purchasable = {this.state.purchasable}
+                    ordered = {this.burgerOrdered}/>
             </Aux>
         )
     }
