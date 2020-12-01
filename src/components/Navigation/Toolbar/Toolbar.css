@@ -16,3 +16,10 @@
 .Toolbar nav{
     height: 100%;
 }
+
+.Logo{
+    height: 80%;
+}
+
+/* Logo class added so that for desktop we can display logo using 80% size and in mobile using different size that size 
+specified in SideBar.css */
