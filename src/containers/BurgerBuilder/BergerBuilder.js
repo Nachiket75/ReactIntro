@@ -94,6 +94,7 @@ class BergerBuilder extends Component{
             <Aux>
                 <Modal show={this.state.ordered} modalClosed = {this.purchaseCancelHandler}>
                     <OrderSummary 
+                        price = {this.state.totalPrice}
                         ingredients={this.state.ingredients}
                         purchaseCancelled={this.purchaseCancelHandler}
                         purchaseContinued={this.purchaseContinueHandler}

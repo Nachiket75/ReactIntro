@@ -11,7 +11,7 @@ const controls = [
 const buildControls = (props)=>(
      //toFixed will keep float no to 2 decimal points
     <div className={classes.BuildControls}>
-        <p>Current Price:<strong>{props.price.toFixed(2)}</strong></p>    
+        <p>Current Price:$<strong>{props.price.toFixed(2)}</strong></p>    
         {controls.map(ctrl=>(
             <BuildControl 
                 key={ctrl.label} 
