@@ -80,6 +80,9 @@ class BergerBuilder extends Component{
     purchaseCancelHandler = () =>{
         this.setState({ordered:false});
     }
+    purchaseContinueHandler = () =>{
+        alert("You Order nigger");
+    }
     render(){
         const disabledInfo = {
             ...this.state.ingredients
@@ -90,7 +93,11 @@ class BergerBuilder extends Component{
         return(
             <Aux>
                 <Modal show={this.state.ordered} modalClosed = {this.purchaseCancelHandler}>
-                    <OrderSummary ingredients={this.state.ingredients}/>
+                    <OrderSummary 
+                        ingredients={this.state.ingredients}
+                        purchaseCancelled={this.purchaseCancelHandler}
+                        purchaseContinued={this.purchaseContinueHandler}
+                    />
                 </Modal>
                 <Burger ingredients={this.state.ingredients}/>
                 <BuildControls
