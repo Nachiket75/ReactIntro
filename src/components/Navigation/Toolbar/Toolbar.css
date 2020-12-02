@@ -23,3 +23,10 @@
 
 /* Logo class added so that for desktop we can display logo using 80% size and in mobile using different size that size 
 specified in SideBar.css */
+
+@media(max-width:499px){
+    .DesktopOnly{
+        display: none;   
+    }
+}
+/* .DesktopOnly class will only show NavigationItems in screen size above 499 px i.e for desktop component only */
