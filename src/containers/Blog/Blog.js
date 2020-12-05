@@ -1,17 +1,23 @@
 import React,{Component} from 'react'
-import  './Blog.css'
+import classes from './Blog.css'
+import Post from '../../components/Post/Post'
+import FullPost from '../../components/FullPost/FullPost'
+import NewPost from '../../components/NewPost/NewPost'
+
 class Blog extends Component{
     render(){
         return(
             <div >
-                <section className="posts">
-                    Post
+                <section className={classes.Posts}>
+                    <Post/>
+                    <Post/>
+                    <Post/>
                 </section>
                 <section>
-                    Full Post
+                    <FullPost/>
                 </section>
                 <section>
-                    New Post
+                    <NewPost/>
                 </section>
 
             </div>
