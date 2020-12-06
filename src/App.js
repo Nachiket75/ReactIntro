@@ -13,4 +13,7 @@ class App extends Component {
 
 export default App;
 
-//add Radium above App is called higher order component i.e wrapping you component and adding some extra functionality 
+//we are using https://jsonplaceholder.typicode.com/ for GET POSTS and all RESTFUL requests.
+
+//we are using axios package to make RESTFUL http request easily. use npm install axios --save on terminal
+// to save this package in npm so that we can use it.
