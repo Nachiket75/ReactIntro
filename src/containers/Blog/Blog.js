@@ -11,22 +11,35 @@ import axios from 'axios'
 //you can learn more about axios pacakge in github page https://github.com/axios/axios
 
 class Blog extends Component{
+    state ={
+        posts:[],
+        selectedPostId : null
+    }
     componentDidMount(){
         axios.get('https://jsonplaceholder.typicode.com/posts')
         .then(response =>{
-            console.log(response);
+            this.setState({posts:response.data})
+            //console.log(response);
         })
     }
+    postSelectHandler=(id)=>{
+        this.setState({selectedPostId:id})
+    }
     render(){
+        const posts = this.state.posts.map(post=>{            
+            return <Post                         
+                    key={post.id}
+                    title={post.title} 
+                    Author="Nachiket"
+                    clicked = {()=>this.postSelectHandler(post.id)}/>
+        })
         return(
             <div >
                 <section className={classes.Posts}>
-                    <Post/>
-                    <Post/>
-                    <Post/>
+                    {posts}
                 </section>
                 <section>
-                    <FullPost/>
+                    <FullPost id={this.state.selectedPostId}/>
                 </section>
                 <section>
                     <NewPost/>
