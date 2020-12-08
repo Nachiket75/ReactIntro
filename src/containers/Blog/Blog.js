@@ -17,7 +17,7 @@ class Blog extends Component{
         error:false
     }
     componentDidMount(){
-        axios.get('https://jsonplaceholder.typicode.com/posts')
+        axios.get('/posts')
         .then(response =>{
             this.setState({posts:response.data})
             //console.log(response);
