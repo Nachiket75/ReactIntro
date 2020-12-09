@@ -4,6 +4,9 @@ import Burger from '../../components/Burger/Burger'
 import BuildControls from '../../components/Burger/BuildControls/BuildControls'
 import Modal from '../../components/UI/Modal/Modal'
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
+import axios from '../../axios-orders'
+import Spinner from '../../components/UI/Spinner/Spinner'
+
 const INGREDIENT_PRICES = {
     salad:0.5,
     cheese:0.4,
@@ -20,7 +23,8 @@ class BergerBuilder extends Component{
         },
         totalPrice:4,
         purchasable:false,
-        ordered:false
+        ordered:false,
+        loading:false
     }
     updatePurchaseState(ingredients){    
         //console.log(ingredients)
@@ -80,8 +84,31 @@ class BergerBuilder extends Component{
     purchaseCancelHandler = () =>{
         this.setState({ordered:false});
     }
-    purchaseContinueHandler = () =>{
-        alert("You Order nigger");
+    purchaseContinueHandler = () =>{        
+        this.setState({loading:true})
+        const order ={
+            ingredients: this.state.ingredients,
+            price:this.state.totalPrice,
+            customer:{
+                name:'Nachiket',
+                address:{
+                    street:'Rajaji Path',
+                    zipCode:'421201',
+                    coutry:'India'
+                },
+                email:'lyonken1@gmail.com'
+            },
+            deliveryMethod: 'fastest'
+        }
+        axios.post('/order.json',order)
+            .then(response =>{
+                console.log(response)
+                this.setState({loading:false})
+            })
+            .catch(error =>{
+                console.log(error)
+                this.setState({loading:false})
+            })
     }
     render(){
         const disabledInfo = {
@@ -90,15 +117,20 @@ class BergerBuilder extends Component{
         for(let key in disabledInfo){
             disabledInfo[key]=disabledInfo[key]<=0;         //this will keep true and false status if ingredient count is 0 then to disabled the less button.
         }
+
+        let orderSummary = <OrderSummary 
+        price = {this.state.totalPrice}
+        ingredients={this.state.ingredients}
+        purchaseCancelled={this.purchaseCancelHandler}
+        purchaseContinued={this.purchaseContinueHandler}      />
+
+        if(this.state.loading){
+            orderSummary = <Spinner/>
+        }
         return(
             <Aux>
                 <Modal show={this.state.ordered} modalClosed = {this.purchaseCancelHandler}>
-                    <OrderSummary 
-                        price = {this.state.totalPrice}
-                        ingredients={this.state.ingredients}
-                        purchaseCancelled={this.purchaseCancelHandler}
-                        purchaseContinued={this.purchaseContinueHandler}
-                    />
+                    {orderSummary}
                 </Modal>
                 <Burger ingredients={this.state.ingredients}/>
                 <BuildControls
