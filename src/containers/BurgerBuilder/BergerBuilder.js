@@ -103,11 +103,11 @@ class BergerBuilder extends Component{
         axios.post('/order.json',order)
             .then(response =>{
                 console.log(response)
-                this.setState({loading:false})
+                this.setState({loading:false, ordered:false})   //To close to modal after post data to server we set ordered to false
             })
             .catch(error =>{
                 console.log(error)
-                this.setState({loading:false})
+                this.setState({loading:false, ordered:false})
             })
     }
     render(){
