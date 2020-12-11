@@ -10,6 +10,8 @@ import axios from 'axios'
 // to save this package in npm so that we can use it.
 //you can learn more about axios pacakge in github page https://github.com/axios/axios
 
+//npm install --save react-router react-router-dom Router pacakage
+
 class Blog extends Component{
     state ={
         posts:[],
@@ -43,7 +45,15 @@ class Blog extends Component{
         }
         
         return(
-            <div >
+            <div className={classes.Blog}>
+                <section>
+                    <nav>
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/new-post">New Post</a></li>
+                        </ul>
+                    </nav>
+                </section>
                 <section className={classes.Posts}>
                     {posts}
                 </section>
