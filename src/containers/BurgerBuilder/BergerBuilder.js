@@ -9,24 +9,59 @@ import Spinner from '../../components/UI/Spinner/Spinner'
 import ErrorHandler from '../../hoc/ErrorHandler'
 
 const INGREDIENT_PRICES = {
-    salad:0.5,
+    bacon:0.7,
     cheese:0.4,
-    meat:1.3,
-    bacon:0.7
+    meat:1.3,    
+    salad:0.5
 }
 class BergerBuilder extends Component{
     state ={
-        ingredients:{
-            salad:0,
-            bacon:0,
-            cheese:0,
-            meat:0
-        },
-        totalPrice:4,
+        ingredients:{},      
+        totalPrice:0,
         purchasable:false,
         ordered:false,
         loading:false
     }
+
+
+    componentDidMount(){
+        let serverTotalPrice=0;
+        axios.get("https://react-burger-331dd-default-rtdb.firebaseio.com/BaseBurgerPrice.json")
+            .then(response =>{
+                this.setState({totalPrice:response.data})
+                serverTotalPrice = response.data;
+                console.log(serverTotalPrice)
+            })
+
+        axios.get("https://react-burger-331dd-default-rtdb.firebaseio.com/Ingredients.json")
+            .then(response=>{
+                this.setState({ingredients:response.data})
+                //console.log(response.data)
+
+            //logic to update totalprice if ingredients already set on server.    
+            const keys   = Object.keys(response.data);
+            const values = Object.values(response.data);  
+            let serverAssignedPrice = 0;      
+            //console.log(keys)
+            for(var i=0;i<values.length;i++){    
+                if(values[i]>0){
+                    for(var j=0; j<values[i];j++ ){
+                       // console.log(keys[i])
+                       // console.log(values[i])
+                        serverAssignedPrice = serverAssignedPrice+INGREDIENT_PRICES[keys[i]]
+                    }
+                }
+            }
+            serverAssignedPrice = serverTotalPrice+serverAssignedPrice;
+            this.setState({totalPrice:serverAssignedPrice})
+            //console.log(serverAssignedPrice)
+            })                
+        
+            
+           
+    }
+
+
     updatePurchaseState(ingredients){    
         //console.log(ingredients)
         let ingValList = Object.values(ingredients)
@@ -112,6 +147,12 @@ class BergerBuilder extends Component{
             })
     }
     render(){
+        do{
+            
+        }while(this.state.ingredients === null)
+        
+        
+
         const disabledInfo = {
             ...this.state.ingredients
         }
