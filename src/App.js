@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import Blog from './containers/Blog/Blog'
+import Blog from './containers/Blog/Blog';
+import {BrowserRouter} from 'react-router-dom'; //BrowserRouter is used to do routing to make single page application look like multiple page application
 
 class App extends Component {  
   render() {      
     return ( 
-      <div>
-        <Blog />   
-      </div>      
+      <BrowserRouter>      
+        <div>
+          <Blog />   
+        </div>      
+      </BrowserRouter>
     )
   }
 }

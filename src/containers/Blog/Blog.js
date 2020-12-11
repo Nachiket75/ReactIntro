@@ -1,9 +1,7 @@
 import React,{Component} from 'react'
 import classes from './Blog.css'
-import Post from '../../components/Post/Post'
-import FullPost from '../../components/FullPost/FullPost'
-import NewPost from '../../components/NewPost/NewPost'
-import axios from 'axios'
+import Posts from './Posts/Posts'
+
 //we are using https://jsonplaceholder.typicode.com/ for GET POSTS and all RESTFUL requests.
 
 //we are using axios package to make RESTFUL http request easily. use npm install axios --save on terminal
@@ -12,39 +10,9 @@ import axios from 'axios'
 
 //npm install --save react-router react-router-dom Router pacakage
 
-class Blog extends Component{
-    state ={
-        posts:[],
-        selectedPostId : null,
-        error:false
-    }
-    componentDidMount(){
-        axios.get('/posts')
-        .then(response =>{
-            this.setState({posts:response.data})
-            //console.log(response);
-        })
-        .catch(error=>{
-            console.log(error)
-            this.setState({error:true})
-        })
-    }
-    postSelectHandler=(id)=>{
-        this.setState({selectedPostId:id})
-    }
+class Blog extends Component{   
     render(){
-        let posts = <p style={{textAlign:"center"}}>Something Went Wrong!</p>
-        if(!this.state.error){
-            posts = this.state.posts.map(post=>{            
-                return <Post                         
-                        key={post.id}
-                        title={post.title} 
-                        Author="Nachiket"
-                        clicked = {()=>this.postSelectHandler(post.id)}/>
-            })
-        }
-        
-        return(
+         return(
             <div className={classes.Blog}>
                 <section>
                     <nav>
@@ -54,15 +22,7 @@ class Blog extends Component{
                         </ul>
                     </nav>
                 </section>
-                <section className={classes.Posts}>
-                    {posts}
-                </section>
-                <section>
-                    <FullPost id={this.state.selectedPostId}/>
-                </section>
-                <section>
-                    <NewPost/>
-                </section>
+                <Posts/>
 
             </div>
         )
