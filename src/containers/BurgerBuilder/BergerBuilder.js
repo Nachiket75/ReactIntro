@@ -45,6 +45,7 @@ class BergerBuilder extends Component{
             //console.log(keys)
             for(var i=0;i<values.length;i++){    
                 if(values[i]>0){
+                    this.setState({purchasable:true})
                     for(var j=0; j<values[i];j++ ){
                        // console.log(keys[i])
                        // console.log(values[i])
