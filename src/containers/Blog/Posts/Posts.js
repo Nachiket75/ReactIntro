@@ -10,6 +10,7 @@ class Posts extends Component{
         error:false
     }
     componentDidMount(){
+        //console.log(this.props)
         axios.get('/posts')
         .then(response =>{
             this.setState({posts:response.data})
