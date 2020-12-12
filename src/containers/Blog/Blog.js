@@ -23,8 +23,10 @@ class Blog extends Component{
                         </ul>
                     </nav>
                 </section>
-                <Route path="/" exact render={()=> <h1>Home this line will only visible in "/" link as exact keyword is used</h1>} />
+                {/* <Route path="/" exact render={()=> <h1>Home this line will only visible in "/" link as exact keyword is used</h1>} />
                 <Route path="/" render={()=><h1>Home2 this line will visible in both "/" link and "/new-post" link</h1>}/>
+                 */}
+                 <Route path="/" exact component={Posts}/>
 
             </div>
         )
