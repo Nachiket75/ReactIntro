@@ -1,6 +1,7 @@
 import React,{Component} from 'react'
 import classes from './Blog.css'
 import Posts from './Posts/Posts'
+import {Route} from 'react-router-dom'
 
 //we are using https://jsonplaceholder.typicode.com/ for GET POSTS and all RESTFUL requests.
 
@@ -22,7 +23,8 @@ class Blog extends Component{
                         </ul>
                     </nav>
                 </section>
-                <Posts/>
+                <Route path="/" exact render={()=> <h1>Home this line will only visible in "/" link as exact keyword is used</h1>} />
+                <Route path="/" render={()=><h1>Home2 this line will visible in both "/" link and "/new-post" link</h1>}/>
 
             </div>
         )
