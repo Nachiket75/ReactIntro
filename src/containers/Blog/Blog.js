@@ -3,6 +3,7 @@ import classes from './Blog.css'
 import Posts from './Posts/Posts'
 import {Route,NavLink} from 'react-router-dom'
 import NewPost from './NewPost/NewPost'
+import FullPost from './FullPost/FullPost'
 
 //we are using https://jsonplaceholder.typicode.com/ for GET POSTS and all RESTFUL requests.
 
@@ -31,6 +32,7 @@ class Blog extends Component{
                  */}
                  <Route path="/" exact component={Posts}/>
                  <Route path="/new-post" component={NewPost}/>
+                 <Route path="/:id" exact component={FullPost}/>
                  
             </div>
         )

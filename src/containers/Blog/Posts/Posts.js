@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import Post from '../../../components/Post/Post'
 import classes from './Posts.css'
+import {NavLink} from 'react-router-dom'
 
 class Posts extends Component{
     state ={
@@ -29,11 +30,15 @@ class Posts extends Component{
         let posts = <p style={{textAlign:"center"}}>Something Went Wrong!</p>
         if(!this.state.error){
             posts = this.state.posts.map(post=>{            
-                return <Post                         
-                        key={post.id}
-                        title={post.title} 
-                        Author="Nachiket"
-                        clicked = {()=>this.postSelectHandler(post.id)}/>
+                return(
+                    <NavLink to={"/"+post.id} key={post.id}>
+                        <Post                         
+                            
+                            title={post.title} 
+                            Author="Nachiket"
+                            clicked = {()=>this.postSelectHandler(post.id)}/>
+                    </NavLink>
+                )
             })
         }
         
