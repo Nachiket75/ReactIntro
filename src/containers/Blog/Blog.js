@@ -30,8 +30,8 @@ class Blog extends Component{
                 {/* <Route path="/" exact render={()=> <h1>Home this line will only visible in "/" NavLink as exact keyword is used</h1>} />
                 <Route path="/" render={()=><h1>Home2 this line will visible in both "/" NavLink and "/new-post" NavLink</h1>}/>
                  */}
-                 <Switch>
                     <Route path="/" exact component={Posts}/>
+                 <Switch>                    
                     <Route path="/new-post" component={NewPost}/>
                     <Route path="/:id" exact component={FullPost}/>
                  </Switch>
