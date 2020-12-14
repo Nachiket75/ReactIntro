@@ -32,7 +32,7 @@ class Blog extends Component{
                  */}
                  <Route path="/" exact component={Posts}/>
                  <Route path="/new-post" component={NewPost}/>
-                 <Route path="/:id" exact component={FullPost}/>
+                 <Route path="/posts/:id" exact component={FullPost}/>
                  
             </div>
         )

@@ -8,7 +8,7 @@ class FullPost extends Component{
     }
     componentDidMount(){
         console.log(this.props)
-        if(this.props.match.params.id && !isNaN(this.props.match.params.id)){       //isNan is added so that when user visit NewPost link it wont receive id which is integer it will receive a text link "/new-post" in that case it will generate error in console to avoid that we use it.
+        if(this.props.match.params.id ){       
             if(!this.state.loadedPost || (this.state.loadedPost && this.state.loadedPost.id!== this.props.id)){
                 console.log(this.props.match.params.id)
                 axios.get('/posts/'+this.props.match.params.id)
