@@ -6,8 +6,7 @@ import {NavLink} from 'react-router-dom'
 
 class Posts extends Component{
     state ={
-        posts:[],
-        selectedPostId : null,
+        posts:[],      
         error:false
     }
     componentDidMount(){
@@ -23,21 +22,19 @@ class Posts extends Component{
         })
     }
     postSelectHandler=(id)=>{
-        this.setState({selectedPostId:id})
+       this.props.history.push('/'+id);  //history.push will add url specified in parameter to the top of the stack.
     }
 
     render(){
         let posts = <p style={{textAlign:"center"}}>Something Went Wrong!</p>
         if(!this.state.error){
             posts = this.state.posts.map(post=>{            
-                return(
-                    <NavLink to={"/"+post.id} key={post.id}>
+                return(                    
                         <Post                         
-                            
+                            key={post.id}
                             title={post.title} 
                             Author="Nachiket"
-                            clicked = {()=>this.postSelectHandler(post.id)}/>
-                    </NavLink>
+                            clicked = {()=>this.postSelectHandler(post.id)}/>                   
                 )
             })
         }
