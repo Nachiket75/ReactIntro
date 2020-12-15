@@ -31,9 +31,9 @@ class Blog extends Component{
                 <Route path="/" render={()=><h1>Home2 this line will visible in both "/" NavLink and "/new-post" NavLink</h1>}/>
                  */}
                     
-                 <Switch>                    
-                    <Route path="/new-post" component={NewPost}/>  
-                    <Route path="/posts"  component={Posts}/>                
+                 <Switch>                                      
+                    <Route path="/new-post" component={NewPost}/>       
+                    <Route path="/posts"  component={Posts}/>                                
                  </Switch>
                  
             </div>

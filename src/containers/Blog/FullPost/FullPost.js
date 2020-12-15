@@ -7,21 +7,28 @@ class FullPost extends Component{
         loadedPost:null
     }
     componentDidMount(){
-        console.log(this.props)
+     //console.log(this.props)
+     this.loadData()
+    }
+    componentDidUpdate(){           //This is added when user click on any post it should load its full post everytime which was not happening in last commit
+        this.loadData()        
+    }
+
+    loadData(){       
         if(this.props.match.params.id ){       
-            if(!this.state.loadedPost || (this.state.loadedPost && this.state.loadedPost.id!== this.props.id)){
-                console.log(this.props.match.params.id)
+            if(!this.state.loadedPost || (this.state.loadedPost && this.state.loadedPost.id!== +this.props.match.params.id)){
+             //   console.log(this.props.match.params.id)
                 axios.get('/posts/'+this.props.match.params.id)
                 .then(response=>{
                 this.setState({loadedPost : response.data})
                 //console.log(response)
-            })
+                 })
             }            
-        }     
+        }  
     }
 
     deletePostHandler = () =>{
-        axios.delete('/posts/'+this.props.id)
+        axios.delete('/posts/'+this.props.match.params.id)
             .then(response =>{
                 console.log(response)
             })
@@ -29,7 +36,7 @@ class FullPost extends Component{
 
     render(){
         let post = <p style={{textAlign:"center"}}>Please Select a Post!</p>;
-        if(this.props.id){
+        if(this.props.match.params.id){
             post = <p style={{textAlign:"center"}}>Loading...</p>;
         }
         if(this.state.loadedPost ){
