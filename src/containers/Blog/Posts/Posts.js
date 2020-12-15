@@ -2,7 +2,9 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import Post from '../../../components/Post/Post'
 import classes from './Posts.css'
-import {NavLink} from 'react-router-dom'
+import {Route} from 'react-router-dom'
+
+import FullPost from '../FullPost/FullPost'
 
 class Posts extends Component{
     state ={
@@ -22,7 +24,7 @@ class Posts extends Component{
         })
     }
     postSelectHandler=(id)=>{
-       this.props.history.push('/'+id);  //history.push will add url specified in parameter to the top of the stack.
+       this.props.history.push('/posts/'+id);  //history.push will add url specified in parameter to the top of the stack.
     }
 
     render(){
@@ -40,9 +42,15 @@ class Posts extends Component{
         }
         
         return(
-            <section className={classes.Posts}>
-                {posts}
-            </section>
+            <div>
+                <section className={classes.Posts}>
+                    {posts}
+                </section>
+                {/* <Route path="/posts/:id" exact component={FullPost}/>  you can use this hardcode way or below better code*/ } 
+                <Route path={this.props.match.url+ "/:id"} exact component={FullPost}/>
+
+            </div>
+            
         )
     }
 }

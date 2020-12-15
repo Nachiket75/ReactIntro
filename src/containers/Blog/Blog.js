@@ -3,7 +3,7 @@ import classes from './Blog.css'
 import Posts from './Posts/Posts'
 import {Route,NavLink,Switch} from 'react-router-dom'
 import NewPost from './NewPost/NewPost'
-import FullPost from './FullPost/FullPost'
+
 
 //we are using https://jsonplaceholder.typicode.com/ for GET POSTS and all RESTFUL requests.
 
@@ -20,7 +20,7 @@ class Blog extends Component{
                 <section>
                     <nav>
                         <ul>
-                            <li><NavLink to="/" exact activeClassName={classes.active}>Home</NavLink></li>
+                            <li><NavLink to="/posts" exact activeClassName={classes.active}>Home</NavLink></li>
                             <li><NavLink to="/new-post" activeClassName={classes.active}>New Post</NavLink></li> 
                             {/* inside the quotes are absolute path if you want relative path you have to add below code
                             this.props.match.url + '/new-post' */}
@@ -30,10 +30,10 @@ class Blog extends Component{
                 {/* <Route path="/" exact render={()=> <h1>Home this line will only visible in "/" NavLink as exact keyword is used</h1>} />
                 <Route path="/" render={()=><h1>Home2 this line will visible in both "/" NavLink and "/new-post" NavLink</h1>}/>
                  */}
-                    <Route path="/" exact component={Posts}/>
+                    
                  <Switch>                    
-                    <Route path="/new-post" component={NewPost}/>
-                    <Route path="/:id" exact component={FullPost}/>
+                    <Route path="/new-post" component={NewPost}/>  
+                    <Route path="/posts"  component={Posts}/>                
                  </Switch>
                  
             </div>
