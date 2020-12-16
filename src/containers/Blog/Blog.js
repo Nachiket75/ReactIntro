@@ -1,8 +1,10 @@
-import React,{Component} from 'react'
+import React,{Component,Suspense} from 'react'
 import classes from './Blog.css'
 import Posts from './Posts/Posts'
 import {Route,NavLink,Switch,Redirect} from 'react-router-dom'
-import NewPost from './NewPost/NewPost'
+//import NewPost from './NewPost/NewPost'
+
+const  NewPost = React.lazy(()=> import('./NewPost/NewPost'))    //lazy is used as it will load NewPost only when its callled by user
 
 
 //we are using https://jsonplaceholder.typicode.com/ for GET POSTS and all RESTFUL requests.
@@ -32,7 +34,13 @@ class Blog extends Component{
                  */}
                     
                  <Switch>                                      
-                    <Route path="/new-post" component={NewPost}/>       
+                    <Route path="/new-post" 
+                        render = {()=>(
+                            <Suspense fallback= {<div>Loading....</div>}>
+                               <NewPost/>
+                            </Suspense>
+                            )}/>       
+
                     <Route path="/posts"  component={Posts}/>   
                     {/* <Route path="/" component={Posts}/> as given below we use Redirect to redirect to /post url instead of this                   */}
                     <Redirect from="/" to="/posts"/>              
