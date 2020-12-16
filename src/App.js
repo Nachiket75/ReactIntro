@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-
+import {Route} from 'react-router-dom';
+import Users from './containers/Users/Users'
+import Courses from './containers/Courses/Courses'
 class App extends Component {  
   render() {      
     return (       
@@ -13,8 +15,9 @@ class App extends Component {
             <li>Load the "Course" component as a nested component of "Courses"</li>
             <li>Add a 404 error page and render it for any unknown routes</li>
             <li>Redirect requests to /all-courses to /courses (=> Your "Courses" page)</li>
-
           </ol>   
+          <Route path="/courses" component={Courses}/>
+          <Route path="/users" component={Users}/>
         </div>      
     )
   }
