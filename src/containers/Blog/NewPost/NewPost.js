@@ -21,6 +21,7 @@ class NewPost extends Component {
             .then(response =>{
                 console.log(response);
                 // this.setState({submitted:true})
+                //this.props.history.push("/posts") this will work but you can go to previous page i.e /new-post link by clicking back button hence we use replace as given below.
                 this.props.history.replace("/posts")// this will work same as Redirect package
             })
     }
