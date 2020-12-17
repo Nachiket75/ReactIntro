@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import {Route,NavLink} from 'react-router-dom';
+import {Route,NavLink,Switch} from 'react-router-dom';
 import Users from './containers/Users/Users'
 import Courses from './containers/Courses/Courses'
+import Course  from './containers/Course/Course'
 import classes from './index.css'
+
 class App extends Component {  
   render() {      
     return (       
@@ -27,8 +29,14 @@ class App extends Component {
               </li>
             </ul>
           </nav>
-          <Route path="/courses" component={Courses}/>
-          <Route path="/users" component={Users}/>
+          {/* you can use exact keyword in /courses to avoid loading it while loading /courses/course link or you can use switch
+          statment with below ordering */}
+          <Switch>            
+            <Route path="/users" component={Users}/>
+            <Route path="/courses/course" component={Course}/>
+            <Route path="/courses" component={Courses}/>             
+          </Switch>
+          
         </div>      
     )
   }
