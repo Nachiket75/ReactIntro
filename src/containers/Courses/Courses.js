@@ -12,7 +12,7 @@ class Courses extends Component{
     render(){
         return(
             <div>
-                <h1>Lakehead University</h1>
+                <h1 style={{textAlign:'center'}}>Lakehead University Courses</h1>
                 <section className = {classes.Courses}>
                     {
                         this.state.courses.map(course => {
