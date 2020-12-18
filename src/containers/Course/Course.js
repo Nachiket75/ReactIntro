@@ -5,7 +5,7 @@ class Course extends Component{
         return(
             <div style={{textAlign:'center'}}>
                 <h1>_COURSE_TITLE_</h1>
-                <p>you selected Course with ID: _ID_</p>
+                <p>you selected Course with ID: {this.props.match.params.courseId}</p>
             </div>
         )
     }
