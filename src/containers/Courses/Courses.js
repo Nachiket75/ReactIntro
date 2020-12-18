@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import classes from './Courses.css'
-import {NavLink} from 'react-router-dom';
+import {NavLink,Route} from 'react-router-dom';
+import Course from '../Course/Course'
 
 class Courses extends Component{
     state = {
@@ -30,6 +31,7 @@ class Courses extends Component{
                         })
                     }
                 </section>
+                <Route path= {this.props.match.url+"/:courseId"} component={Course}/>
             </div>
 
         )
