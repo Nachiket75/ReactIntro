@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import {Route,NavLink,Switch} from 'react-router-dom';
+import {Route,NavLink,Switch,Redirect} from 'react-router-dom';
 import Users from './containers/Users/Users'
 import Courses from './containers/Courses/Courses'
 import classes from './index.css'
-
+import NoMatch from './component/NoMatch'
 class App extends Component {  
   render() {      
     return (       
@@ -32,7 +32,9 @@ class App extends Component {
           statment with below ordering */}
           <Switch>            
             <Route path="/users" component={Users}/>            
-            <Route path="/courses" component={Courses}/>             
+            <Route path="/courses" component={Courses}/>    
+            <Redirect from="/all-courses" to="/courses"/>
+            <Route component={NoMatch} />           
           </Switch>
           
         </div>      
