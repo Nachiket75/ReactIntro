@@ -122,30 +122,32 @@ class BergerBuilder extends Component{
         this.setState({ordered:false});
     }
     purchaseContinueHandler = () =>{        
-        this.setState({loading:true})
-        const order ={
-            ingredients: this.state.ingredients,
-            price:this.state.totalPrice,
-            customer:{
-                name:'Nachiket',
-                address:{
-                    street:'Rajaji Path',
-                    zipCode:'421201',
-                    coutry:'India'
-                },
-                email:'lyonken1@gmail.com'
-            },
-            deliveryMethod: 'fastest'
-        }
-        axios.post('/order.json',order)
-            .then(response =>{
-                console.log(response)
-                this.setState({loading:false, ordered:false})   //To close to modal after post data to server we set ordered to false
-            })
-            .catch(error =>{
-                console.log(error)
-                this.setState({loading:false, ordered:false})
-            })
+        // this.setState({loading:true})
+        // const order ={
+        //     ingredients: this.state.ingredients,
+        //     price:this.state.totalPrice,
+        //     customer:{
+        //         name:'Nachiket',
+        //         address:{
+        //             street:'Rajaji Path',
+        //             zipCode:'421201',
+        //             coutry:'India'
+        //         },
+        //         email:'lyonken1@gmail.com'
+        //     },
+        //     deliveryMethod: 'fastest'
+        // }
+        // axios.post('/order.json',order)
+        //     .then(response =>{
+        //         console.log(response)
+        //         this.setState({loading:false, ordered:false})   //To close to modal after post data to server we set ordered to false
+        //     })
+        //     .catch(error =>{
+        //         console.log(error)
+        //         this.setState({loading:false, ordered:false})
+        //     })
+
+            this.props.history.push('/checkout')
     }
     render(){
         do{
