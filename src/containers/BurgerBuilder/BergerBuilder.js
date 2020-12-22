@@ -149,7 +149,7 @@ class BergerBuilder extends Component{
             //console.log(this.props)
             this.props.history.push({
                 pathname:'/checkout' ,                    
-                state:{ingredients:this.state.ingredients}
+                state:{ingredients:this.state.ingredients,totalPrice:this.state.totalPrice}
             })        
             //console.log(this.props)
     }   
@@ -173,9 +173,9 @@ class BergerBuilder extends Component{
         purchaseCancelled={this.purchaseCancelHandler}
         purchaseContinued={this.purchaseContinueHandler}      />
 
-        if(this.state.loading){
-            orderSummary = <Spinner/>
-        }
+        // if(this.state.loading){
+        //     orderSummary = <Spinner/>
+        // }
         return(
             <Aux>
                 <Modal show={this.state.ordered} modalClosed = {this.purchaseCancelHandler}>

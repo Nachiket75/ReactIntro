@@ -6,11 +6,13 @@ class Checkout extends Component{
     state={
         ingredients :{
 
-        }
+        },
+        totalPrice:0
     }
     componentDidMount(){
         console.log(this.props)
         this.setState({ingredients:this.props.location.state.ingredients })
+        this.setState({totalPrice:this.props.location.state.totalPrice })
         
     }
 
@@ -19,7 +21,9 @@ class Checkout extends Component{
     }
 
     checkoutContinueHandler = () =>{
-        this.props.history.replace('/checkout/contact-data')     //replace method will top of the stack with checkout url and you will go to checkout page
+        this.props.history.replace({pathname:'/checkout/contact-data',
+                                    state:{ingredients:this.state.ingredients,totalPrice:this.state.totalPrice}
+    })     //replace method will top of the stack with checkout url and you will go to checkout page
     }
 
     render(){
@@ -28,7 +32,9 @@ class Checkout extends Component{
                 <CheckoutSummary ingredients = {this.state.ingredients}
                 checkoutContinue = {this.checkoutContinueHandler}
                 checkoutCancelled ={this.checkoutCancelledHandler} />
-                <Route path={this.props.match.url+ "/contact-data" }   component={ContactData}   />
+                <Route 
+                    path={this.props.match.url+ "/contact-data" }                    
+                    component={ContactData}   />
             </div>
         )
     }
