@@ -8,10 +8,7 @@
     border:1px solid rgb(79, 76, 201);
     background-color: rgb(181, 197, 250);
 }
-.Input{
-    display: block;
-    align-items: center;
-}
+
 @media(min-width:600px){
     .ContactData{
         width: 500px;
