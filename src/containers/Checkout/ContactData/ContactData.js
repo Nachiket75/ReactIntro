@@ -44,7 +44,7 @@ class ContactData extends Component{
             }
            
         }
-        axios.post('/order.json',order)
+        axios.post('/orders.json',order)
             .then(response =>{
                 console.log(response)
                 this.setState({loading:false})   //To close to modal after post data to server we set ordered to false
