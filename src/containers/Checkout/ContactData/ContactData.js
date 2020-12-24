@@ -6,13 +6,7 @@ import Spinner from '../../../components/UI/Spinner/Spinner'
 import Input from '../../../components/UI/Input/Input'
 
 class ContactData extends Component{
-    state = {
-        name:'',
-        email:'',
-        address:{
-            street:'',
-            postalCode:''
-        },
+    state = {  
         loading:false
     }
 
