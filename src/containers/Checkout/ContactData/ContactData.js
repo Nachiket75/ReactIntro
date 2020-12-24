@@ -63,18 +63,17 @@ class ContactData extends Component{
       
     }
 
-    render(){  
-        
+    render(){         
         return(
             this.state.loading ? <Spinner/>: 
             <div className={classes.ContactData}>
                 <h1>Enter your contact details</h1>
                 <form onSubmit={this.orderHandler}>
-                    <Input inputtype="input" label="Name" type="text" id="name" placeholder="Your Name"/>
-                    <Input inputtype="input" label="Email" type="email" id="email" placeholder="Your Email" />                    
-                    <Input inputtype="input" label="Street" type="text" id="street" placeholder="Your Street" />                    
-                    <Input inputtype="input" label="Country" type="text" id="country" placeholder="Your Country" />                    
-                    <Input inputtype="input" label="PostalCode" type="text" id="postalcode" placeholder="Your PostalCode" />      
+                    <Input inputtype="input" label="Name" type="text" id="name" placeholder="Your Name" minLen={5}/>
+                    <Input inputtype="input" label="Email" type="email" id="email" placeholder="Your Email" minLen={10}/>                    
+                    <Input inputtype="input" label="Street" type="text" id="street" placeholder="Your Street" minLen={7}/>                    
+                    <Input inputtype="input" label="Country" type="text" id="country" placeholder="Your Country" minLen={4}/>                    
+                    <Input inputtype="input" label="PostalCode" type="text" id="postalcode" placeholder="Your PostalCode" minLen={5}/>      
                     <br/>
                     <Button btnType="Success" type="submit">ORDER</Button>                       
                 </form>                
