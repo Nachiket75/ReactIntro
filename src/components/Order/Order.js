@@ -56,17 +56,18 @@ const order = (props) => {
                     border:'1px solid lightgreen',
                     padding:'5px',
                     color:'green',
-                    backgroundColor:'white'
+                    backgroundColor:'white',
+                    fontWeight:'bold'
                 }}
             key={ig.name}>{ig.name}:({ig.quantity})</span>
     })
     return(
         <div className={classes.Order}>           
             {/* <p>Personal Details: {props.customer}</p> */}
-            <p>Personal Details:</p>
+            <p><strong>Personal Details:</strong></p>
             {customerOutput}
-            <p>ingredients:{ingredientOutput}</p>
-            <p>price: <strong>USD {props.price.toFixed(2)}</strong></p>
+            <p><strong>ingredients:</strong>{ingredientOutput}</p>
+            <p><strong>price: USD {props.price.toFixed(2)}</strong></p>
         </div>
     )
 }
