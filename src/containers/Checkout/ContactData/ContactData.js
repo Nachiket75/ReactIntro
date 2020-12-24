@@ -30,13 +30,14 @@ class ContactData extends Component{
             ingredients: ingrdients,
             price:totalPrice,
             customer:{
-                name:document.getElementById("name").value,
+                name:document.getElementById("name").value,               
+                email:document.getElementById("email").value,
+                cookingInstruction: document.getElementById("cookingInstruction").value,
                 address:{
                     street:document.getElementById("street").value,
                     zipCode:document.getElementById("postalcode").value,
                     country:document.getElementById("country").value
-                },
-                email:document.getElementById("email").value
+                }
             }
            
         }
@@ -67,7 +68,8 @@ class ContactData extends Component{
                     <Input inputtype="input" label="Email" type="email" id="email" placeholder="Your Email" minlen={10}/>                    
                     <Input inputtype="input" label="Street" type="text" id="street" placeholder="Your Street" minlen={7}/>                    
                     <Input inputtype="input" label="Country" type="text" id="country" placeholder="Your Country" minlen={4}/>                    
-                    <Input inputtype="input" label="PostalCode" type="text" id="postalcode" placeholder="Your PostalCode" minlen={5}/>      
+                    <Input inputtype="input" label="PostalCode" type="text" id="postalcode" placeholder="Your PostalCode" minlen={5}/>
+                    <Input inputtype="textarea" label="Cooking Instruction" id="cookingInstruction"type="text" placeholder="Additional Cooking Instruction" />                    
                     <br/>
                     <Button btnType="Success" type="submit">ORDER</Button>                       
                 </form>                
