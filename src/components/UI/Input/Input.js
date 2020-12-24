@@ -6,13 +6,13 @@ const input = (props) =>{
     
     switch(props.inputtype){
         case ('input'): 
-            inputElement = <input className={classes.InputElement}{...props } minLength={props.minLen} required/>
+            inputElement = <input className={classes.InputElement}{...props } minLength={props.minlen} required/>
             break;
         case ('textarea'):
-            inputElement = <textarea className={classes.InputElement}{...props} minLength={props.minLen} required />
+            inputElement = <textarea className={classes.InputElement}{...props} minLength={props.minlen} required />
             break;
         default:
-            inputElement= <input className={classes.InputElement}{...props} minLength={props.minLen} required/>
+            inputElement= <input className={classes.InputElement}{...props} minLength={props.minlen} required/>
             break;
     }
     return(

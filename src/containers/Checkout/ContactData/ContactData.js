@@ -63,11 +63,11 @@ class ContactData extends Component{
             <div className={classes.ContactData}>
                 <h1>Enter your contact details</h1>
                 <form onSubmit={this.orderHandler}>
-                    <Input inputtype="input" label="Name" type="text" id="name" placeholder="Your Name" minLen={5}/>
-                    <Input inputtype="input" label="Email" type="email" id="email" placeholder="Your Email" minLen={10}/>                    
-                    <Input inputtype="input" label="Street" type="text" id="street" placeholder="Your Street" minLen={7}/>                    
-                    <Input inputtype="input" label="Country" type="text" id="country" placeholder="Your Country" minLen={4}/>                    
-                    <Input inputtype="input" label="PostalCode" type="text" id="postalcode" placeholder="Your PostalCode" minLen={5}/>      
+                    <Input inputtype="input" label="Name" type="text" id="name" placeholder="Your Name" minlen={5}/>
+                    <Input inputtype="input" label="Email" type="email" id="email" placeholder="Your Email" minlen={10}/>                    
+                    <Input inputtype="input" label="Street" type="text" id="street" placeholder="Your Street" minlen={7}/>                    
+                    <Input inputtype="input" label="Country" type="text" id="country" placeholder="Your Country" minlen={4}/>                    
+                    <Input inputtype="input" label="PostalCode" type="text" id="postalcode" placeholder="Your PostalCode" minlen={5}/>      
                     <br/>
                     <Button btnType="Success" type="submit">ORDER</Button>                       
                 </form>                
