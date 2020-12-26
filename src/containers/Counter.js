@@ -20,6 +20,12 @@ class Counter extends Component{
             case 'sub':
                 this.setState((prevState)=>{return {counter:prevState.counter-value}})
                 break;
+            case 'res':
+                this.setState({counter:0})
+                break;
+            default:
+                this.setState({counter:0})
+                break;
         }
     }
     render(){
@@ -29,7 +35,8 @@ class Counter extends Component{
                 <CounterControl label="Inc" clicked={()=>this.counterChangedHandler('inc')}/>
                 <CounterControl label="Dec" clicked={()=>this.counterChangedHandler('dec')}/>
                 <CounterControl label="Add 5" clicked={()=>this.counterChangedHandler('add',5)}/>
-                <CounterControl label="Subtract 5" clicked={()=>this.counterChangedHandler('sub',5)}/>
+                <CounterControl label="Subtract 5" clicked={()=>this.counterChangedHandler('sub',5)}/> <br/><br/>
+                <CounterControl label="Reset" clicked={()=>this.counterChangedHandler('res')}/>
             </div>
         )
     }
