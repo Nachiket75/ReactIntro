@@ -33,11 +33,18 @@ class Counter extends Component{
         return(
             <div>
                 <CounterOutput value={this.props.ctr}/>
-                <CounterControl label="Inc" clicked={()=>this.counterChangedHandler('inc')}/>
-                <CounterControl label="Dec" clicked={()=>this.counterChangedHandler('dec')}/>
-                <CounterControl label="Add 5" clicked={()=>this.counterChangedHandler('add',5)}/>
-                <CounterControl label="Subtract 5" clicked={()=>this.counterChangedHandler('sub',5)}/> <br/><br/>
-                <CounterControl label="Reset" clicked={()=>this.counterChangedHandler('res')}/>
+                {/* <CounterControl label="Inc" clicked={()=>this.counterChangedHandler('inc')}/> */}
+                
+                {/* <CounterControl label="Dec" clicked={()=>this.counterChangedHandler('dec')}/> */}
+                {/* <CounterControl label="Add 5" clicked={()=>this.counterChangedHandler('add',5)}/>
+                <CounterControl label="Subtract 5" clicked={()=>this.counterChangedHandler('sub',5)}/> <br/><br/> */}
+                {/* <CounterControl label="Reset" clicked={()=>this.counterChangedHandler('res')}/> */}
+
+                <CounterControl label="Inc" clicked={this.props.onIncrementCounter}/>
+                <CounterControl label="Dec" clicked={this.props.onDecrementCounter}/>
+                <CounterControl label="Add 10" clicked={this.props.onAddCounter}/>
+                <CounterControl label="Subtract 10" clicked={this.props.onSubCounter}/> <br/><br/>
+                <CounterControl label="Reset" clicked={this.props.onReset}/>
             </div>
         )
     }
@@ -49,4 +56,13 @@ const mapStateToProps =state=> {
     }    
 }
 
-export default connect(mapStateToProps)(Counter);
+const mapDispatchToProps = dispatch =>{
+    return{
+        onIncrementCounter :()=> dispatch({type:"INCREMENT"}),
+        onDecrementCounter :()=> dispatch({type:"DECREMENT"}),
+        onAddCounter :()=> dispatch({type:"ADD", value:10}),
+        onSubCounter :()=> dispatch({type:"SUB", value:10}),
+        onReset : ()=> dispatch({type:"RESET"})
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Counter);
