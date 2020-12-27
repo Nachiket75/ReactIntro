@@ -4,12 +4,9 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import {BrowserRouter} from 'react-router-dom'
+import {createStore} from 'redux'
+import reducer from './store/reducer'
 
-const app=(
-    <BrowserRouter>
-     <App />    
-    </BrowserRouter>  
-);
-
-ReactDOM.render(app , document.getElementById('root'));
+const store = createStore(reducer)
+ReactDOM.render(<App/> , document.getElementById('root'));
 registerServiceWorker();
