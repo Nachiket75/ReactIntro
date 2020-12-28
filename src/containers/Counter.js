@@ -4,9 +4,9 @@ import CounterOutput from '../components/CounterOutput/CounterOutput'
 import {connect} from 'react-redux'
 
 class Counter extends Component{
-    state={
-        counter:0
-    }
+    // state={
+    //     counter:0
+    // }
     counterChangedHandler = (action,value) =>{
         switch(action){
             case 'inc':
@@ -45,6 +45,15 @@ class Counter extends Component{
                 <CounterControl label="Add 10" clicked={this.props.onAddCounter}/>
                 <CounterControl label="Subtract 10" clicked={this.props.onSubCounter}/> <br/><br/>
                 <CounterControl label="Reset" clicked={this.props.onReset}/>
+                <hr/>
+                <button onClick={this.props.onStoreResult}>Store Results</button>
+                <ul>
+                    {this.props.storedResults.map(strResults=>(
+                        <li key={strResults.id} onClick={this.props.onDeleteResult}>{strResults.value}</li>
+                    ))}
+                    
+                </ul>
+
             </div>
         )
     }
@@ -52,7 +61,8 @@ class Counter extends Component{
 
 const mapStateToProps =state=> {
     return{
-        ctr : state.counter
+        ctr : state.counter,
+        storedResults:state.results
     }    
 }
 
@@ -62,7 +72,9 @@ const mapDispatchToProps = dispatch =>{
         onDecrementCounter :()=> dispatch({type:"DECREMENT"}),
         onAddCounter :()=> dispatch({type:"ADD", value:10}),
         onSubCounter :()=> dispatch({type:"SUB", value:10}),
-        onReset : ()=> dispatch({type:"RESET"})
+        onReset : ()=> dispatch({type:"RESET"}),
+        onStoreResult : () => dispatch({type:"STORE_RESULTS"}),
+        onDeleteResult : () => dispatch({type:"DELETE_RESULT"})        
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Counter);
