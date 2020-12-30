@@ -1,0 +1,16 @@
+.Input{
+    margin:20px auto;
+    padding:20px;
+    width:30%;
+    font-weight: bold;   
+    border:1px solid blueviolet;
+    display: block;
+
+}
+
+.Button{
+    margin:20px auto;
+    padding:20px;
+    color:white;
+    background-color: green;
+}

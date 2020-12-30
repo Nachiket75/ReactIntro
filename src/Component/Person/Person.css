@@ -1,0 +1,12 @@
+.Person{
+    padding:10px;
+    margin: 10px auto;
+    /* border:1px solid blueviolet; */
+    /* box-sizing: border-box; */
+    /* box-shadow: 0 3px 3px rgb(203, 156, 212); */
+    width: 80%;
+    text-align: center; 
+    background-color: blueviolet;
+    color:white;
+    font-weight: bold;
+}
