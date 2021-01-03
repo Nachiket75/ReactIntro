@@ -7,6 +7,8 @@ import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
 import axios from '../../axios-orders'
 //import Spinner from '../../components/UI/Spinner/Spinner'
 import ErrorHandler from '../../hoc/ErrorHandler'
+import {connect} from 'react-redux';
+import * as actionTypes from '../../Store/actionTypes'
 
 const INGREDIENT_PRICES = {
     bacon:0.7,
@@ -16,7 +18,7 @@ const INGREDIENT_PRICES = {
 }
 class BergerBuilder extends Component{
     state ={
-        ingredients:{},      
+        //ingredients:{},      
         totalPrice:0,
         purchasable:false,
         ordered:false,
@@ -33,14 +35,15 @@ class BergerBuilder extends Component{
                 console.log(serverTotalPrice)
             })
 
-        axios.get("https://react-burger-331dd-default-rtdb.firebaseio.com/Ingredients.json")
-            .then(response=>{
-                this.setState({ingredients:response.data})
+        // axios.get("https://react-burger-331dd-default-rtdb.firebaseio.com/Ingredients.json")
+        //     .then(response=>{
+        //         this.setState({ingredients:response.data})
                 //console.log(response.data)
 
             //logic to update totalprice if ingredients already set on server.    
-            const keys   = Object.keys(response.data);
-            const values = Object.values(response.data);  
+            
+            const keys   = Object.keys(this.props.ings);//Object.keys(response.data);
+            const values = Object.values(this.props.ings);  //Object.values(response.data);  
             let serverAssignedPrice = 0;      
             //console.log(keys)
             for(var i=0;i<values.length;i++){    
@@ -56,10 +59,7 @@ class BergerBuilder extends Component{
             serverAssignedPrice = serverTotalPrice+serverAssignedPrice;
             this.setState({totalPrice:serverAssignedPrice})
             //console.log(serverAssignedPrice)
-            })                
-        
-            
-           
+           // })            
     }
 
 
@@ -103,7 +103,7 @@ class BergerBuilder extends Component{
 
         const updateCount = oldCount-1;
         const updatedIngredients = {
-            ...this.state.ingredients
+            ...this.props.ings //...this.state.ingredients
         }
         updatedIngredients[type] = updateCount;
         const priceDeduction = INGREDIENT_PRICES[type];
@@ -149,19 +149,20 @@ class BergerBuilder extends Component{
             //console.log(this.props)
             this.props.history.push({
                 pathname:'/checkout' ,                    
-                state:{ingredients:this.state.ingredients,totalPrice:this.state.totalPrice}
+                state:{ingredients:this.props.ings, //ingredients:this.state.ingredients,
+                    totalPrice:this.state.totalPrice}
             })        
             //console.log(this.props)
     }   
     render(){
-        do{
+        // do{
             
-        }while(this.state.ingredients === null)
+        // }while(this.props.ings)//while(this.state.ingredients === null)
         
         
 
         const disabledInfo = {
-            ...this.state.ingredients
+            ...this.props.ings//...this.state.ingredients
         }
         for(let key in disabledInfo){
             disabledInfo[key]=disabledInfo[key]<=0;         //this will keep true and false status if ingredient count is 0 then to disabled the less button.
@@ -169,7 +170,7 @@ class BergerBuilder extends Component{
 
         let orderSummary = <OrderSummary 
         price = {this.state.totalPrice}
-        ingredients={this.state.ingredients}
+        ingredients= {this.props.ings} // ingredients={this.state.ingredients}
         purchaseCancelled={this.purchaseCancelHandler}
         purchaseContinued={this.purchaseContinueHandler}      />
 
@@ -181,10 +182,10 @@ class BergerBuilder extends Component{
                 <Modal show={this.state.ordered} modalClosed = {this.purchaseCancelHandler}>
                     {orderSummary}
                 </Modal>
-                <Burger ingredients={this.state.ingredients}/>
+                <Burger ingredients={this.props.ings} />  {/* /{this.state.ingredients}/> */}
                 <BuildControls
-                    ingredientAdded = {this.addIngredientHandler}
-                    ingredientRemoved = {this.removeIngredientHandler}
+                    ingredientAdded = {this.props.onIngredientAdded}     //{this.addIngredientHandler}
+                    ingredientRemoved = {this.props.onIngredientRemove}  //{this.removeIngredientHandler}
                     disabled={disabledInfo}
                     price ={this.state.totalPrice}
                     purchasable = {this.state.purchasable}
@@ -194,4 +195,17 @@ class BergerBuilder extends Component{
     }
 }
 
-export default ErrorHandler(BergerBuilder,axios);
+const mapStateToProps = state =>{
+    return{
+    ings:state.ingredients
+    }
+}
+
+const mapDispatchToProps = dispatch =>{
+    return{
+        onIngredientAdded : (ingName)=> dispatch({type:actionTypes.ADD_INGREDIENT, ingredientName:ingName}),
+        onIngredientRemove : (ingName)=> dispatch({type:actionTypes.REMOVE_INGREDIENT, ingredientName:ingName})
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps) (ErrorHandler(BergerBuilder,axios));
