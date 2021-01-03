@@ -10,16 +10,11 @@ import ErrorHandler from '../../hoc/ErrorHandler'
 import {connect} from 'react-redux';
 import * as actionTypes from '../../Store/actionTypes'
 
-const INGREDIENT_PRICES = {
-    bacon:0.7,
-    cheese:0.4,
-    meat:1.3,    
-    salad:0.5
-}
+
 class BergerBuilder extends Component{
     state ={
         //ingredients:{},      
-        totalPrice:0,
+       // totalPrice:0,
         purchasable:false,
         ordered:false,
         loading:false
@@ -27,13 +22,13 @@ class BergerBuilder extends Component{
 
 
     componentDidMount(){
-        let serverTotalPrice=0;
-        axios.get("https://react-burger-331dd-default-rtdb.firebaseio.com/BaseBurgerPrice.json")
-            .then(response =>{
-                this.setState({totalPrice:response.data})
-                serverTotalPrice = response.data;
-                console.log(serverTotalPrice)
-            })
+        // let serverTotalPrice=0;
+        // axios.get("https://react-burger-331dd-default-rtdb.firebaseio.com/BaseBurgerPrice.json")
+        //     .then(response =>{
+        //         this.setState({totalPrice:response.data})
+        //         serverTotalPrice = response.data;
+        //         console.log(serverTotalPrice)
+        //     })
 
         // axios.get("https://react-burger-331dd-default-rtdb.firebaseio.com/Ingredients.json")
         //     .then(response=>{
@@ -42,22 +37,22 @@ class BergerBuilder extends Component{
 
             //logic to update totalprice if ingredients already set on server.    
             
-            const keys   = Object.keys(this.props.ings);//Object.keys(response.data);
-            const values = Object.values(this.props.ings);  //Object.values(response.data);  
-            let serverAssignedPrice = 0;      
-            //console.log(keys)
-            for(var i=0;i<values.length;i++){    
-                if(values[i]>0){
-                    this.setState({purchasable:true})
-                    for(var j=0; j<values[i];j++ ){
-                       // console.log(keys[i])
-                       // console.log(values[i])
-                        serverAssignedPrice = serverAssignedPrice+INGREDIENT_PRICES[keys[i]]
-                    }
-                }
-            }
-            serverAssignedPrice = serverTotalPrice+serverAssignedPrice;
-            this.setState({totalPrice:serverAssignedPrice})
+            // const keys   = Object.keys(this.props.ings);//Object.keys(response.data);
+            // const values = Object.values(this.props.ings);  //Object.values(response.data);  
+            // let serverAssignedPrice = 0;      
+            // //console.log(keys)
+            // for(var i=0;i<values.length;i++){    
+            //     if(values[i]>0){
+            //         this.setState({purchasable:true})
+            //         for(var j=0; j<values[i];j++ ){
+            //            // console.log(keys[i])
+            //            // console.log(values[i])
+            //             serverAssignedPrice = serverAssignedPrice+INGREDIENT_PRICES[keys[i]]
+            //         }
+            //     }
+            // }
+            // serverAssignedPrice = serverTotalPrice+serverAssignedPrice;
+            // this.setState({totalPrice:serverAssignedPrice})
             //console.log(serverAssignedPrice)
            // })            
     }
@@ -78,43 +73,43 @@ class BergerBuilder extends Component{
             this.setState({purchasable:false});      
 
     }
-    addIngredientHandler= (type) => {
-        const oldCount = this.state.ingredients[type];
-        const updateCount = oldCount+1;
-        const updatedIngredients = {
-            ...this.state.ingredients
-        }
-        updatedIngredients[type] = updateCount;
-        const priceAddition = INGREDIENT_PRICES[type];
-        const oldPrice = this.state.totalPrice;
-        const newPrice = oldPrice + priceAddition;
+    // addIngredientHandler= (type) => {
+    //     const oldCount = this.state.ingredients[type];
+    //     const updateCount = oldCount+1;
+    //     const updatedIngredients = {
+    //         ...this.state.ingredients
+    //     }
+    //     updatedIngredients[type] = updateCount;
+    //     const priceAddition = INGREDIENT_PRICES[type];
+    //     const oldPrice = this.state.totalPrice;
+    //     const newPrice = oldPrice + priceAddition;
 
-        this.setState({totalPrice:newPrice, ingredients:updatedIngredients})
+    //     this.setState({totalPrice:newPrice, ingredients:updatedIngredients})
         
-        console.log(newPrice);
-        this.updatePurchaseState(updatedIngredients);
-    }
+    //     console.log(newPrice);
+    //     this.updatePurchaseState(updatedIngredients);
+    // }
     
-    removeIngredientHandler= (type)=> {
-        const oldCount = this.state.ingredients[type];
-        if(oldCount<=0){                                 //if oldCount is zero we wont subtract more as already it is 0 and ingredients added count can not be negative.
-            return;
-        }
+    // removeIngredientHandler= (type)=> {
+    //     const oldCount = this.state.ingredients[type];
+    //     if(oldCount<=0){                                 //if oldCount is zero we wont subtract more as already it is 0 and ingredients added count can not be negative.
+    //         return;
+    //     }
 
-        const updateCount = oldCount-1;
-        const updatedIngredients = {
-            ...this.props.ings //...this.state.ingredients
-        }
-        updatedIngredients[type] = updateCount;
-        const priceDeduction = INGREDIENT_PRICES[type];
-        const oldPrice = this.state.totalPrice;
-        const newPrice = oldPrice - priceDeduction;
+    //     const updateCount = oldCount-1;
+    //     const updatedIngredients = {
+    //         ...this.props.ings //...this.state.ingredients
+    //     }
+    //     updatedIngredients[type] = updateCount;
+    //     const priceDeduction = INGREDIENT_PRICES[type];
+    //     const oldPrice = this.state.totalPrice;
+    //     const newPrice = oldPrice - priceDeduction;
 
-        this.setState({totalPrice:newPrice, ingredients:updatedIngredients})
+    //     this.setState({totalPrice:newPrice, ingredients:updatedIngredients})
         
-        console.log(newPrice);
-        this.updatePurchaseState(updatedIngredients);
-    }
+    //     console.log(newPrice);
+    //     this.updatePurchaseState(updatedIngredients);
+    // }
     burgerOrdered = () =>{
         this.setState({ordered:true});
     }
@@ -150,7 +145,7 @@ class BergerBuilder extends Component{
             this.props.history.push({
                 pathname:'/checkout' ,                    
                 state:{ingredients:this.props.ings, //ingredients:this.state.ingredients,
-                    totalPrice:this.state.totalPrice}
+                    totalPrice:this.props.totalPrice}
             })        
             //console.log(this.props)
     }   
@@ -169,7 +164,7 @@ class BergerBuilder extends Component{
         }
 
         let orderSummary = <OrderSummary 
-        price = {this.state.totalPrice}
+        price = {this.props.totalPrice}
         ingredients= {this.props.ings} // ingredients={this.state.ingredients}
         purchaseCancelled={this.purchaseCancelHandler}
         purchaseContinued={this.purchaseContinueHandler}      />
@@ -187,7 +182,7 @@ class BergerBuilder extends Component{
                     ingredientAdded = {this.props.onIngredientAdded}     //{this.addIngredientHandler}
                     ingredientRemoved = {this.props.onIngredientRemove}  //{this.removeIngredientHandler}
                     disabled={disabledInfo}
-                    price ={this.state.totalPrice}
+                    price ={this.props.totalPrice}
                     purchasable = {this.state.purchasable}
                     ordered = {this.burgerOrdered}/>
             </Aux>
@@ -197,7 +192,8 @@ class BergerBuilder extends Component{
 
 const mapStateToProps = state =>{
     return{
-    ings:state.ingredients
+    ings:state.ingredients,
+    totalPrice:state.totalPrice
     }
 }
 
