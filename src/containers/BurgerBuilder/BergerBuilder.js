@@ -15,7 +15,7 @@ class BergerBuilder extends Component{
     state ={
         //ingredients:{},      
        // totalPrice:0,
-        purchasable:false,
+        //purchasable:false,
         ordered:false,
         loading:false
     }
@@ -67,10 +67,11 @@ class BergerBuilder extends Component{
             totalIngredients=totalIngredients+ingValList[i]
         }
         console.log(totalIngredients)
-        if(totalIngredients>0)
-            this.setState({purchasable:true});         
-        else
-            this.setState({purchasable:false});      
+        return totalIngredients > 0
+        // if(totalIngredients>0)
+        //     this.setState({purchasable:true});         
+        // else
+        //     this.setState({purchasable:false});      
 
     }
     // addIngredientHandler= (type) => {
@@ -183,7 +184,7 @@ class BergerBuilder extends Component{
                     ingredientRemoved = {this.props.onIngredientRemove}  //{this.removeIngredientHandler}
                     disabled={disabledInfo}
                     price ={this.props.totalPrice}
-                    purchasable = {this.state.purchasable}
+                    purchasable = {this.updatePurchaseState(this.props.ings)}//{this.state.purchasable}
                     ordered = {this.burgerOrdered}/>
             </Aux>
         )
