@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import CounterControl from '../components/CounterControl/CounterControl'
 import CounterOutput from '../components/CounterOutput/CounterOutput'
 import {connect} from 'react-redux'
-import * as actionTypes from '../store/ActionTypes'
+import * as actionTypes from '../Store/ActionTypes'
 
 class Counter extends Component{
     // state={
