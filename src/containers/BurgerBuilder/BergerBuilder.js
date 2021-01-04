@@ -166,7 +166,7 @@ class BergerBuilder extends Component{
         }
 
         let orderSummary = <OrderSummary 
-        price = {this.props.totalPrice}
+        price = {this.props.totalPrice.toFixed(2)}
         ingredients= {this.props.ings} // ingredients={this.state.ingredients}
         purchaseCancelled={this.purchaseCancelHandler}
         purchaseContinued={this.purchaseContinueHandler}      />
