@@ -143,11 +143,12 @@ class BergerBuilder extends Component{
         //         this.setState({loading:false, ordered:false})
         //     })
             //console.log(this.props)
-            this.props.history.push({
-                pathname:'/checkout' ,                    
-                state:{ingredients:this.props.ings, //ingredients:this.state.ingredients,
-                    totalPrice:this.props.totalPrice}
-            })        
+            // this.props.history.push({
+            //     pathname:'/checkout' ,                    
+            //     state:{ingredients:this.props.ings, //ingredients:this.state.ingredients,
+            //         totalPrice:this.props.totalPrice}
+            // }
+            this.props.history.push('/checkout')        
             //console.log(this.props)
     }   
     render(){
