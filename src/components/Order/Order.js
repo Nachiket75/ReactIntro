@@ -67,7 +67,7 @@ const order = (props) => {
             <p><strong>Personal Details:</strong></p>
             {customerOutput}
             <p><strong>ingredients:</strong>{ingredientOutput}</p>
-            <p><strong>price: USD {props.price.toFixed(2)}</strong></p>
+            <p><strong>price: USD {props.price}</strong></p>
         </div>
     )
 }
