@@ -7,7 +7,7 @@ import {createStore, combineReducers,applyMiddleware,compose} from 'redux'
 import counterReducer from './Store/reducers/counter'
 import resultReducer from './Store/reducers/result'
 import {Provider} from 'react-redux'
-
+import thunk from 'redux-thunk'
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;     //this is advance redux can be found on the link https://github.com/zalmoxisus/redux-devtools-extension or by searching redux-dev tools
 
 const logger = store => {
@@ -26,6 +26,6 @@ const rootReducer = combineReducers({
     res:resultReducer
 })
 
-const store = createStore(rootReducer,composeEnhancers(applyMiddleware(logger)))  
+const store = createStore(rootReducer,composeEnhancers(applyMiddleware(logger,thunk)))  
 ReactDOM.render(<Provider store={store}><App/></Provider> , document.getElementById('root'));
 registerServiceWorker();
