@@ -8,7 +8,7 @@ import axios from '../../axios-orders'
 //import Spinner from '../../components/UI/Spinner/Spinner'
 import ErrorHandler from '../../hoc/ErrorHandler'
 import {connect} from 'react-redux';
-import * as actionTypes from '../../Store/actionTypes'
+import * as actionCreator from '../../Store/actions/actionCreator'
 
 
 class BergerBuilder extends Component{
@@ -201,8 +201,8 @@ const mapStateToProps = state =>{
 
 const mapDispatchToProps = dispatch =>{
     return{
-        onIngredientAdded : (ingName)=> dispatch({type:actionTypes.ADD_INGREDIENT, ingredientName:ingName}),
-        onIngredientRemove : (ingName)=> dispatch({type:actionTypes.REMOVE_INGREDIENT, ingredientName:ingName})
+        onIngredientAdded : (ingName)=> dispatch(actionCreator.addIngredient(ingName)),
+        onIngredientRemove : (ingName)=> dispatch(actionCreator.removeIngredient(ingName))
     }
 }
 
