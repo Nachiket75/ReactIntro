@@ -21,7 +21,10 @@ class BergerBuilder extends Component{
     }
 
 
-    componentDidMount(){
+    componentDidMount(){       
+        console.log("componentDidMount")
+        this.props.onInitIngredients()
+       
         // let serverTotalPrice=0;
         // axios.get("https://react-burger-331dd-default-rtdb.firebaseio.com/BaseBurgerPrice.json")
         //     .then(response =>{
@@ -56,8 +59,7 @@ class BergerBuilder extends Component{
             //console.log(serverAssignedPrice)
            // })            
     }
-
-
+    
     updatePurchaseState(ingredients){    
         //console.log(ingredients)
         let ingValList = Object.values(ingredients)
@@ -151,10 +153,10 @@ class BergerBuilder extends Component{
             this.props.history.push('/checkout')        
             //console.log(this.props)
     }   
-    render(){
-        // do{
+    render(){        
+        // do{            
             
-        // }while(this.props.ings)//while(this.state.ingredients === null)
+        // }while(this.props.ings === null)//while(this.state.ingredients === null)
         
         
 
@@ -164,9 +166,10 @@ class BergerBuilder extends Component{
         for(let key in disabledInfo){
             disabledInfo[key]=disabledInfo[key]<=0;         //this will keep true and false status if ingredient count is 0 then to disabled the less button.
         }
+        
 
         let orderSummary = <OrderSummary 
-        price = {this.props.totalPrice.toFixed(2)}
+        price = {this.props.totalPrice}//{this.props.totalPrice.toFixed(2)}
         ingredients= {this.props.ings} // ingredients={this.state.ingredients}
         purchaseCancelled={this.purchaseCancelHandler}
         purchaseContinued={this.purchaseContinueHandler}      />
@@ -194,15 +197,17 @@ class BergerBuilder extends Component{
 
 const mapStateToProps = state =>{
     return{
-    ings:state.ingredients,
-    totalPrice:state.totalPrice
+        ings:state.ingredients,
+        totalPrice:state.totalPrice,
+        error:state.error
     }
 }
 
 const mapDispatchToProps = dispatch =>{
     return{
         onIngredientAdded : (ingName)=> dispatch(actionCreator.addIngredient(ingName)),
-        onIngredientRemove : (ingName)=> dispatch(actionCreator.removeIngredient(ingName))
+        onIngredientRemove : (ingName)=> dispatch(actionCreator.removeIngredient(ingName)),
+        onInitIngredients: () => dispatch(actionCreator.initIngredients())
     }
 }
 
