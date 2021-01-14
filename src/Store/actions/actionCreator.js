@@ -108,7 +108,7 @@ export const authFail = (error) =>{
     }
 }
 
-export const auth = (email,password) =>{
+export const auth = (email,password,isSignUp) =>{
     return dispatch =>{
         dispatch(authStart())
         const authdata = {
@@ -116,10 +116,13 @@ export const auth = (email,password) =>{
             password:password,                          // as shown in signup user firebase url we have created auth payload
             returnSecureToken:true
         }
+        let url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCc7Z22g6YY9q1i_yBEv5wQE-5vI33wteE" //signup url
         //serach firebase rest auth on google open link and on right hand side you will see link of firebase For sign up user
         //axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]") this is the link for sign up the user
         //copy API_KEY FROM firebase project general settings
-        axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCc7Z22g6YY9q1i_yBEv5wQE-5vI33wteE",authdata)
+        if(!isSignUp)
+            url="https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCc7Z22g6YY9q1i_yBEv5wQE-5vI33wteE" //signin url
+        axios.post(url,authdata)
         .then(response=>{
             console.log(response)
             dispatch(authSuccess(response.data)) //on sucesss we dispatching authSuccess()
