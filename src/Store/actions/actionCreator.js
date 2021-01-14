@@ -1,6 +1,6 @@
 import *as actionTypes from './actionTypes'
-import axios from '../../axios-orders'
-
+import axiosOrder from '../../axios-orders'
+import axios from 'axios'
 // const INGREDIENT_PRICES = {
 //     bacon:0.7,
 //     cheese:0.4,
@@ -62,7 +62,7 @@ export const initIngredients = () =>{
     return dispatch=>{     
        
         var serverIngredients = {}
-        axios.get("https://react-burger-331dd-default-rtdb.firebaseio.com/Ingredients.json")
+        axiosOrder.get("https://react-burger-331dd-default-rtdb.firebaseio.com/Ingredients.json")
             .then(response=>{
                 console.log(response.data)    
                 serverIngredients =response.data
@@ -101,7 +101,7 @@ export const authSuccess = (authData) =>{
     }
 }
 
-export const authError = (error) =>{
+export const authFail = (error) =>{
     return{
         type:actionTypes.AUTH_FAIL,
         error:error
@@ -111,5 +111,22 @@ export const authError = (error) =>{
 export const auth = (email,password) =>{
     return dispatch =>{
         dispatch(authStart())
+        const authdata = {
+            email:email,
+            password:password,                          // as shown in signup user firebase url we have created auth payload
+            returnSecureToken:true
+        }
+        //serach firebase rest auth on google open link and on right hand side you will see link of firebase For sign up user
+        //axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]") this is the link for sign up the user
+        //copy API_KEY FROM firebase project general settings
+        axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCc7Z22g6YY9q1i_yBEv5wQE-5vI33wteE",authdata)
+        .then(response=>{
+            console.log(response)
+            dispatch(authSuccess(response.data)) //on sucesss we dispatching authSuccess()
+        })
+        .catch(error=>{
+            console.log(error)
+            dispatch(authFail())     //on fail we dispatching authFail()
+        })
     }
 }
