@@ -28,7 +28,7 @@ class ContactData extends Component{
     //  console.log(totalPrice)
      const order ={
             ingredients: this.props.ings,
-            price:this.props.totalPrice.toFixed(2),
+            price:this.props.totalPrice,//.toFixed(2),
             customer:{
                 name:document.getElementById("name").value,               
                 email:document.getElementById("email").value,

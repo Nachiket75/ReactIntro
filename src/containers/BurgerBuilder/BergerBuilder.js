@@ -197,9 +197,10 @@ class BergerBuilder extends Component{
 
 const mapStateToProps = state =>{
     return{
-        ings:state.ingredients,
-        totalPrice:state.totalPrice,
-        error:state.error
+       // ings:state.ing.ingredients,
+        ings:state.ing.ingredients,
+        totalPrice:state.ing.totalPrice,
+        error:state.ing.error
     }
 }
 
