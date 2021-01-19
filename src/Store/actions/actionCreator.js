@@ -129,7 +129,7 @@ export const auth = (email,password,isSignUp) =>{
         })
         .catch(error=>{
             console.log(error)
-            dispatch(authFail())     //on fail we dispatching authFail()
+            dispatch(authFail(error.response.data.error))     //on fail we dispatching authFail()
         })
     }
 }
