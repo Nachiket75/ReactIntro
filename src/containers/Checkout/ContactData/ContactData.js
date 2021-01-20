@@ -41,7 +41,7 @@ class ContactData extends Component{
             }
            
         }
-        axios.post('/orders.json',order)
+        axios.post('/orders.json?auth='+this.props.token,order)
             .then(response =>{
                 console.log(response)
                 this.setState({loading:false})   //To close to modal after post data to server we set ordered to false
@@ -84,7 +84,8 @@ class ContactData extends Component{
 const mapStateToProps =state =>{
     return{
         ings:state.ingredients,
-        totalPrice:state.totalPrice
+        totalPrice:state.totalPrice,
+        token:state.auth.token
     }
 }
 export default connect(mapStateToProps)(ContactData);
