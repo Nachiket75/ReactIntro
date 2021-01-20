@@ -2,6 +2,7 @@ import React,{Component} from 'react'
 import Order from '../../components/Order/Order'
 import axios from '../../axios-orders'
 import ErrorHandler from '../../hoc/ErrorHandler'
+import {connect} from 'react-redux'
 
 class Orders extends Component {
     state = {
@@ -9,8 +10,8 @@ class Orders extends Component {
         loading:true
     }
     componentDidMount(){
-        console.log("fetchdata")
-        axios.get("/orders.json")
+        console.log("fetchdata"+this.props.token)
+        axios.get("/orders.json?auth=" + this.props.token)
         .then(res=>{
             const fetchOrders = []   
             console.log(res.data)
@@ -42,4 +43,10 @@ class Orders extends Component {
     }
 }
 
-export default ErrorHandler(Orders,axios);
+const mapStateToProps =state =>{
+    return{
+        token:state.auth.token
+    }
+}
+
+export default connect(mapStateToProps) (ErrorHandler(Orders,axios));
