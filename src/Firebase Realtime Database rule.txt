@@ -1,0 +1,16 @@
+{
+  "rules": {
+    "Ingredients" :{
+    	".read": "true",  // 2021-1-8
+    	".write": "true",  // 2021-1-8
+    },
+    "BaseBurgerPrice" :{
+    	".read": "true",  // 2021-1-8
+    	".write": "true",  // 2021-1-8
+    },
+    "orders":{
+      ".read":"auth!=null",
+      ".write": "auth!=null"
+      }
+  }
+}
