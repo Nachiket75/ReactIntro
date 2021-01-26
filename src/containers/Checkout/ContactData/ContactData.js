@@ -24,11 +24,9 @@ class ContactData extends Component{
      this.setState({loading:true})   
     //  const ingrdients = this.props.location.state.ingredients;
     //  const totalPrice = this.props.location.state.totalPrice;
-    //  console.log(ingrdients)
-    //  console.log(totalPrice)
-     const order ={
+         const order ={
             ingredients: this.props.ings,
-            price:this.props.totalPrice,//.toFixed(2),
+            price:this.props.totalPrice.toFixed(2),
             customer:{
                 name:document.getElementById("name").value,               
                 email:document.getElementById("email").value,
@@ -83,8 +81,8 @@ class ContactData extends Component{
 
 const mapStateToProps =state =>{
     return{
-        ings:state.ingredients,
-        totalPrice:state.totalPrice,
+        ings:state.ing.ingredients,
+        totalPrice:state.ing.totalPrice,
         token:state.auth.token
     }
 }
