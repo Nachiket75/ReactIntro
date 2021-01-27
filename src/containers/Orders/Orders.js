@@ -10,7 +10,7 @@ class Orders extends Component {
         loading:true
     }
     componentDidMount(){
-        console.log("fetchdata"+this.props.token)
+        // console.log("fetchdata"+this.props.token)
         axios.get("/orders.json?auth=" + this.props.token)
         .then(res=>{
             const fetchOrders = []   

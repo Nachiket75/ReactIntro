@@ -4,7 +4,7 @@ import Button from '../../components/UI/Button/Button'
 import classes from './Auth.css'
 import * as actionCreators from '../../Store/actions/actionCreator'
 import {connect} from 'react-redux'
-
+import {Redirect} from 'react-router-dom'
 
 class Auth extends Component{
     state ={
@@ -30,9 +30,14 @@ class Auth extends Component{
                 <p>{this.props.error.message}</p>
             )
         }
+        let authRedirect = null
+        if(this.props.isAuthenticated){
+            authRedirect = <Redirect to="/" />
+        }
         return(
             <div className={classes.Auth}>
                 <h1>Sign In</h1>
+                {authRedirect}
                 {errormessage}
                 <form onSubmit={this.signInHandler}>                    
                     <Input inputtype="input" label="username" type="text" id="username" placeholder="Username" minlen={5}/>
@@ -52,7 +57,8 @@ class Auth extends Component{
 
 const mapStateToProps = state =>{
     return{        
-        error:state.auth.error
+        error:state.auth.error,
+        isAuthenticated:state.auth.token!=null
     }
 }
 const mapDispatchToProps = dispatch =>{
