@@ -10,7 +10,6 @@ import ErrorHandler from '../../hoc/ErrorHandler'
 import {connect} from 'react-redux';
 import * as actionCreator from '../../Store/actions/actionCreator'
 
-
 class BergerBuilder extends Component{
     state ={
         //ingredients:{},      
@@ -114,7 +113,11 @@ class BergerBuilder extends Component{
     //     this.updatePurchaseState(updatedIngredients);
     // }
     burgerOrdered = () =>{
-        this.setState({ordered:true});
+        if(this.props.isAuthenticated){
+            this.setState({ordered:true});
+        } else {
+             this.props.history.replace("/auth")             
+        }
     }
     purchaseCancelHandler = () =>{
         this.setState({ordered:false});
@@ -188,6 +191,7 @@ class BergerBuilder extends Component{
                     ingredientRemoved = {this.props.onIngredientRemove}  //{this.removeIngredientHandler}
                     disabled={disabledInfo}
                     price ={this.props.totalPrice}
+                    isAuth ={this.props.isAuthenticated}
                     purchasable = {this.updatePurchaseState(this.props.ings)}//{this.state.purchasable}
                     ordered = {this.burgerOrdered}/>
             </Aux>
@@ -200,7 +204,8 @@ const mapStateToProps = state =>{
        // ings:state.ing.ingredients,
         ings:state.ing.ingredients,
         totalPrice:state.ing.totalPrice,
-        error:state.ing.error
+        error:state.ing.error,
+        isAuthenticated:state.auth.token != null
     }
 }
 
