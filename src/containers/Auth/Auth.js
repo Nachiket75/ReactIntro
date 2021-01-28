@@ -32,7 +32,16 @@ class Auth extends Component{
         }
         let authRedirect = null
         if(this.props.isAuthenticated){
-            authRedirect = <Redirect to="/" />
+            // console.log(this.props.totalPrice)
+            // console.log(this.props.serverPrice)
+            if(this.props.totalPrice === this.props.serverPrice){
+               // authRedirect = <Redirect to="/" />
+               this.props.history.replace("/")
+            }
+            else{
+                authRedirect = <Redirect to="/checkout" />
+                //this.props.history.replace("/checkout")
+            }
         }
         return(
             <div className={classes.Auth}>
@@ -58,6 +67,8 @@ class Auth extends Component{
 const mapStateToProps = state =>{
     return{        
         error:state.auth.error,
+        totalPrice:state.ing.totalPrice,
+        serverPrice:state.ing.serverPrice,
         isAuthenticated:state.auth.token!=null
     }
 }
