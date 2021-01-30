@@ -6,8 +6,13 @@ import {Route,Switch} from 'react-router-dom'
 import Orders from './containers/Orders/Orders'
 import Auth from './containers/Auth/Auth'
 import Logout from './containers/Logout/Logout'
+import {connect} from 'react-redux'
+import * as actionCreators from './Store/actions/actionCreator'
 
 class App extends Component {  
+  componentDidMount(){
+    this.props.onTryAutoSignUp()
+  }
   render() {      
     return ( 
       <div>
@@ -25,6 +30,12 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps =dispatch=>{
+  return{
+    onTryAutoSignUp : ()=>dispatch(actionCreators.checkAuthState())
+  }
+}
+
+export default connect(null,mapDispatchToProps) (App);
 
 //add Radium above App is called higher order component i.e wrapping you component and adding some extra functionality 
