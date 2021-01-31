@@ -27,6 +27,7 @@ class ContactData extends Component{
          const order ={
             ingredients: this.props.ings,
             price:this.props.totalPrice.toFixed(2),
+            userId:this.props.userId,
             customer:{
                 name:document.getElementById("name").value,               
                 email:document.getElementById("email").value,
@@ -83,7 +84,8 @@ const mapStateToProps =state =>{
     return{
         ings:state.ing.ingredients,
         totalPrice:state.ing.totalPrice,
-        token:state.auth.token
+        token:state.auth.token,
+        userId:state.auth.userId
     }
 }
 export default connect(mapStateToProps)(ContactData);

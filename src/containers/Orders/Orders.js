@@ -11,7 +11,8 @@ class Orders extends Component {
     }
     componentDidMount(){
         // console.log("fetchdata"+this.props.token)
-        axios.get("/orders.json?auth=" + this.props.token)
+        const queryParams = '?auth='+this.props.token + '&orderBy="userId"&equalTo="'+this.props.userId + '"'
+        axios.get("/orders.json"+queryParams)
         .then(res=>{
             const fetchOrders = []   
             console.log(res.data)
@@ -21,7 +22,8 @@ class Orders extends Component {
                     id:resp                    
                 })
             }
-
+            console.log(this.props.userId)
+            console.log(fetchOrders)
             this.setState({loading:false, orders:fetchOrders})
         })
         .catch(err =>{
@@ -45,7 +47,8 @@ class Orders extends Component {
 
 const mapStateToProps =state =>{
     return{
-        token:state.auth.token
+        token:state.auth.token,
+        userId:state.auth.userId
     }
 }
 
