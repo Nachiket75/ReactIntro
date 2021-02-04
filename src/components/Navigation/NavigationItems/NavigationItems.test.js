@@ -17,5 +17,10 @@ describe('Tesing <NavigationItems>',()=>{
         const wrapper = shallow(<NavigationItems isAuthenticated/>)
         expect(wrapper.find(NavigationItem)).toHaveLength(3);
       })
+
+    it('Should present Logout NavigationItem ',()=>{
+      const wrapper = shallow(<NavigationItems isAuthenticated/>)
+      expect(wrapper.contains(<NavigationItem link="/logout">Logout</NavigationItem>)).toEqual(true)
+    })
       
 })
